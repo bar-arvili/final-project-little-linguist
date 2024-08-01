@@ -1,3 +1,23 @@
+mat-toolbar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+button[mat-icon-button] {
+  margin-right: 8px; /* מרווח קטן בין כפתור התפריט לבין האלמנטים האחרים */
+}
+
 .example-spacer {
-  flex: 1 1 auto;
+  flex: 1; /* ממלא את כל המקום הפנוי */
+}
+
+mat-icon {
+  cursor: pointer; /* מציין שניתן ללחוץ על האייקונים */
+}
+
+.LittleLinguist {
+  font-weight: bold;
+  font-size: 1.2em;
+  cursor: pointer; /* מציין שניתן ללחוץ על הכותרת */
 }
