@@ -8,3 +8,7 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+mat-icon {
+  cursor: pointer; /* מציין שניתן ללחוץ על האייקונים */
+}

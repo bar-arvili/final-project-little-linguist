@@ -4,16 +4,16 @@ import { CategoryFormComponent } from './category-form/category-form.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GameSelectionComponent } from './Game selection/Game selection.component';
 import { HelpComponent } from './help/help.component';
-import { MixedLettersColorsComponent } from './mixed letters - colors/mixed letters - colors.component';
-import { WordSorterColorsComponent } from './word sorter - colors/word sorter - colors.component';
+import { MixedLettersComponent } from './mixed letters/mixed letters.component';
+import { WordSorterComponent } from './word sorter/word sorter.component';
 
 export const routes: Routes = [
-    {path: "", component: CategoriesListComponent},
+    {path: "Admin", component: CategoriesListComponent},
     {path: "category/:id", component: CategoryFormComponent},
     {path: "newcategory", component: CategoryFormComponent},
     {path: "dashboard", component: DashboardComponent},
     {path: "Game-selection", component: GameSelectionComponent},
     {path: "help", component: HelpComponent},
-    {path: "mixed-letters-colors", component: MixedLettersColorsComponent},
-    {path: "word-sorter-colors", component: WordSorterColorsComponent},
+    {path: "mixed-letters/:id", component: MixedLettersComponent},
+    {path: "word-sorter /:id", component: WordSorterComponent},
 ];

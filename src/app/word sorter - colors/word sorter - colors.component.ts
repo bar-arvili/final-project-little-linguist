@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-word-sorter---colors',
@@ -11,4 +11,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './word sorter - colors.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WordSorterColorsComponent { }
+export class WordSorterColorsComponent { 
+  @Input() id= ''
+}
+
