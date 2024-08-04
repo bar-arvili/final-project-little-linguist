@@ -11,3 +11,5 @@ export class Category {
         public target : Language) {
     }
 }
+
+

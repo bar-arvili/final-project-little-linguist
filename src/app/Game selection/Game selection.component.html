@@ -1,21 +1,15 @@
-<p>Game selection works!</p> 
-
 <div class="container">
   <div *ngFor="let game of allGames" class="game-card">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>{{ game.GameName }}</mat-card-title>
+        <mat-card-title>{{game.Name}}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <p>{{ game.GameDescription }}</p>
+        <p>{{game.Description}}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button [routerLink]="[game.GameUrl]">Play Now</button>
+        <button mat-button color="primary" (click)="openDialog(game)">Play Now</button>
       </mat-card-actions>
     </mat-card>
   </div>
 </div>
-
-
-  
-  

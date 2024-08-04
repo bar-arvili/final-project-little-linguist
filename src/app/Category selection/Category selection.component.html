@@ -1,0 +1,25 @@
+<p>Category selection works!</p>,
+
+<h1 mat-dialog-title>Select a category</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select (selectionChange)="onCategorySelected($event.value)">
+      <mat-option *ngFor="let category of categories" [value]="category.id">
+        {{ category.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div *ngIf="selectedCategory">
+  <p>Selected Category: {{ selectedCategory.name }}</p>
+  <p>Word Count: {{ selectedCategory.words.length }}</p>
+  <p>Last Updated: {{ selectedCategory.lastUpdateDate | date:'medium' }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onPlayClick()" [disabled]="!selectedCategory">Play</button>
+  <button mat-button (click)="closeDialog()">Cancel</button>
+</div>
+
+
+

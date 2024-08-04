@@ -6,6 +6,7 @@ import { GameSelectionComponent } from './Game selection/Game selection.componen
 import { HelpComponent } from './help/help.component';
 import { MixedLettersComponent } from './mixed letters/mixed letters.component';
 import { WordSorterComponent } from './word sorter/word sorter.component';
+import { CategorySelectionComponent } from './Category selection/Category selection.component';
 
 export const routes: Routes = [
     {path: "Admin", component: CategoriesListComponent},
@@ -16,4 +17,6 @@ export const routes: Routes = [
     {path: "help", component: HelpComponent},
     {path: "mixed-letters/:id", component: MixedLettersComponent},
     {path: "word-sorter /:id", component: WordSorterComponent},
+    {path: "Category-selection", component: CategorySelectionComponent},
+    
 ];

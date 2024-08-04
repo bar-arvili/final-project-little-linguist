@@ -8,7 +8,7 @@ export class CategoriesService {
   private readonly CATEGORIES_KEY = 'categories';
   private readonly NEXT_ID_KEY = 'nextId';
 
-  private getCategories() : Map<number, Category>{
+  private getCategories(id?: any) : Map<number, Category>{
     let categoriesString = localStorage.getItem(this.CATEGORIES_KEY);
 
     if (!categoriesString) {
