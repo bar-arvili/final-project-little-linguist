@@ -12,7 +12,7 @@ export const routes: Routes = [
     {path: "Admin", component: CategoriesListComponent},
     {path: "category/:id", component: CategoryFormComponent},
     {path: "newcategory", component: CategoryFormComponent},
-    {path: "dashboard", component: DashboardComponent},
+    {path: "", component: DashboardComponent},
     {path: "Game-selection", component: GameSelectionComponent},
     {path: "help", component: HelpComponent},
     {path: "mixed-letters/:id", component: MixedLettersComponent},

@@ -20,6 +20,7 @@ export class WordSorterComponent implements OnInit {
   currentCategory?: Category;
 
   constructor(private CategoriesService: CategoriesService) { }
+  
   ngOnInit(): void {
     this.currentCategory = this.CategoriesService.get(parseInt(this.id));
   }

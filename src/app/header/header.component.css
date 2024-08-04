@@ -5,19 +5,19 @@ mat-toolbar {
 }
 
 button[mat-icon-button] {
-  margin-right: 8px; /* מרווח קטן בין כפתור התפריט לבין האלמנטים האחרים */
+  margin-right: 8px; 
 }
 
 .example-spacer {
-  flex: 1; /* ממלא את כל המקום הפנוי */
+  flex: 1; 
 }
 
 mat-icon {
-  cursor: pointer; /* מציין שניתן ללחוץ על האייקונים */
+  cursor: pointer; /
 }
 
 .LittleLinguist {
   font-weight: bold;
   font-size: 1.2em;
-  cursor: pointer; /* מציין שניתן ללחוץ על הכותרת */
+  cursor: pointer; 
 }

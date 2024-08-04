@@ -13,7 +13,7 @@ import { CategorySelectionComponent } from '../Category selection/Category selec
   imports: [
     CommonModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   templateUrl: './Game selection.component.html',
   styleUrl: './Game selection.component.css',
@@ -21,6 +21,7 @@ import { CategorySelectionComponent } from '../Category selection/Category selec
 })
 
 export class GameSelectionComponent implements OnInit {
+  
   allGames: GameProfile[] = [];
 
   constructor(private gamesService: GamesService, private dialog: MatDialog) {}
@@ -28,10 +29,6 @@ export class GameSelectionComponent implements OnInit {
   ngOnInit(): void {
     this.allGames = this.gamesService.getGames();
     console.log(this.allGames); 
-  }
-
-  loadGames(): void {
-    this.allGames = this.gamesService.getGames(); 
   }
 
   openDialog(game: GameProfile): void {

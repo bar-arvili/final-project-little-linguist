@@ -8,7 +8,6 @@ import { Category } from '../../shared/model/category';
 import { FormsModule } from '@angular/forms';
 import { CategoriesService } from '../services/categories.service';
 
-
 @Component({
   selector: 'app-category-selection',
   standalone: true,
