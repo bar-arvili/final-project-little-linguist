@@ -13,8 +13,9 @@
   <p>Selected Category: {{ selectedCategory.name }}</p>
   <p>Word Count: {{ selectedCategory.words.length }}</p>
   <p>Last Updated: {{ selectedCategory.lastUpdateDate | date:'medium' }}</p>
-  <button mat-button [disabled]="!selectedCategory" [routerLink]="[game.GameUrl,selectedCategory.id]">Play</button>
 </div>
+
 <div mat-dialog-actions>
+  <button mat-button [disabled]="!selectedCategory" [routerLink]="[game.GameUrl,selectedCategory?.id]">Play</button>
   <button mat-button (click)="closeDialog()">Cancel</button>
 </div>

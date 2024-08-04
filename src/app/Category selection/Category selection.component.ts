@@ -6,10 +6,9 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material
 import { MatSelectModule } from '@angular/material/select';
 import { Category } from '../../shared/model/category';
 import { FormsModule } from '@angular/forms';
-import { CategoriesService } from '../services/categories.service';
-import { GamesService } from '../services/games.service';
+import { CategoriesService } from '../services/categories.service';;
 import { GameProfile } from '../../shared/model/gameProfile';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-category-selection',
@@ -35,14 +34,12 @@ export class CategorySelectionComponent implements OnInit {
 
   constructor(
     private categoriesService: CategoriesService,
-    private gamesService: GamesService,
     private dialogRef: MatDialogRef<CategorySelectionComponent>,
     @Inject(MAT_DIALOG_DATA) public game : GameProfile,
   ) {}
 
   ngOnInit(): void {
     this.loadCategories();
-    // this.allGames = this.gamesService.getGames();
   }
 
   loadCategories(): void {
@@ -51,12 +48,6 @@ export class CategorySelectionComponent implements OnInit {
 
   onCategorySelected(categoryId: number): void {
     this.selectedCategory = this.categories.find(category => category.id === categoryId);
-  }
-
-  onPlayClick(): void {
-    if (this.selectedCategory) {
-      this.dialogRef.close(this.selectedCategory);
-    }
   }
 
   closeDialog(): void {
