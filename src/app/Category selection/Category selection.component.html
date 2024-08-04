@@ -1,6 +1,4 @@
-<p>Category selection works!</p>,
-
-<h1 mat-dialog-title>Select a category</h1>
+<h1 mat-dialog-title>{{game.Name}}</h1>
 <div mat-dialog-content>
   <mat-form-field appearance="fill">
     <mat-label>Category</mat-label>
@@ -15,11 +13,8 @@
   <p>Selected Category: {{ selectedCategory.name }}</p>
   <p>Word Count: {{ selectedCategory.words.length }}</p>
   <p>Last Updated: {{ selectedCategory.lastUpdateDate | date:'medium' }}</p>
+  <button mat-button [disabled]="!selectedCategory" [routerLink]="[game.GameUrl,selectedCategory.id]">Play</button>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onPlayClick()" [disabled]="!selectedCategory">Play</button>
   <button mat-button (click)="closeDialog()">Cancel</button>
 </div>
-
-
-

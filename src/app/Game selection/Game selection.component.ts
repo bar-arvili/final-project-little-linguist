@@ -21,8 +21,8 @@ import { CategorySelectionComponent } from '../Category selection/Category selec
 })
 
 export class GameSelectionComponent implements OnInit {
-  
   allGames: GameProfile[] = [];
+  game? : GameProfile;
 
   constructor(private gamesService: GamesService, private dialog: MatDialog) {}
 
@@ -33,7 +33,7 @@ export class GameSelectionComponent implements OnInit {
 
   openDialog(game: GameProfile): void {
     this.dialog.open(CategorySelectionComponent, {
-      data: { game }
+      data: game 
     });
   }
 }
