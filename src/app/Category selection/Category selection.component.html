@@ -16,6 +16,10 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button [disabled]="!selectedCategory" [routerLink]="[game.GameUrl,selectedCategory?.id]">Play</button>
+  <button mat-button 
+  [disabled]="!selectedCategory" 
+  [mat-dialog-close]="true" 
+  [routerLink]="[game.GameUrl, selectedCategory?.id]">Play
+</button>
   <button mat-button (click)="closeDialog()">Cancel</button>
 </div>

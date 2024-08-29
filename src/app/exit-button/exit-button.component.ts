@@ -15,10 +15,9 @@ import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
 })
 export class ExitButtonComponent {
 
-
   constructor(public dialog: MatDialog) {}
 
   openExitDialog(): void {
-    this.dialog.open(ExitDialogComponent); // פותח את הדיאלוג
+    this.dialog.open(ExitDialogComponent); 
   }
 }

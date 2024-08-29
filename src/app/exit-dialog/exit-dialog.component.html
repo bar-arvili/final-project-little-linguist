@@ -5,6 +5,6 @@
   </div>
   
   <div mat-dialog-actions>
-    <button mat-button [routerLink]="['Game-selection']">YES</button>
+    <button mat-button [mat-dialog-close]="true" [routerLink]="['/Game-selection']">YES</button>
     <button mat-button mat-dialog-close>NO</button>
   </div>

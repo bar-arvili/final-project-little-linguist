@@ -1,39 +1,45 @@
 <div class="container">
-    <div>mixed letters</div>
-    <div> category name {{currentCategory?.name}}</div>
+  <div>Mixed Letters</div>
+  <div>Category Name {{ currentCategory?.name }}</div>
 </div>
 
-<div> 
-    <app-exit-button></app-exit-button>
-</div>
+<button mat-icon-button (click)="exit()">
+  <mat-icon>exit_to_app</mat-icon>
+</button>
 
-<div class="game-container">
-    <mat-progress-bar mode="determinate" [value]="(currentWordIndex + 1) / totalWords * 100"></mat-progress-bar>
-    <div class="progress-info">
-      <span>{{ currentWordIndex + 1 }} / {{ totalWords }}</span>
+
+<div *ngIf="!endGame">
+  <div class="word-container">
+    <div class="hebrew-word">
+      <p class="label">Meaning in Hebrew:</p>
+      <span class="hebrew">{{ words?.[currentWordIndex]?.target }}</span>
     </div>
-    
-    <div *ngIf="currentCategory">
-        <!-- Show the words or other properties here -->
-      </div>
-
-
-    <div class="word-container">
-        <p *ngIf="currentCategory && currentCategory.words">
-            {{ currentCategory.words[currentWordIndex].origin }}
-          </p>
-          <p>{{ mixWord }}</p>
+    <div class="english-word">
+      <p class="label">Mixed English Letters:</p>
+      <span class="english">{{ mixWord }}</span>
     </div>
-  
-    <mat-form-field appearance="fill">
-      <mat-label>Enter the correct word</mat-label>
-      <input matInput [(ngModel)]="userInput">
+  </div>
+
+  <div class="input-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Guess:</mat-label>
+      <input matInput #userGuess placeholder="Enter correct English word" />
     </mat-form-field>
-  
-    <div class="actions">
-      <button mat-button (click)="onSubmit()" [disabled]="!userInput.trim()">Submit</button>
-      <button mat-button (click)="onReset()">Reset</button>
-
+    <div class="button-container">
+      <button mat-raised-button color="primary" class="submit" (click)="submit(userGuess.value)">Submit</button>
+      <button mat-raised-button color="accent" class="reset" (click)="reset()">Reset</button>
     </div>
-  
-   
+  </div>
+
+  <div class="progress-container">
+    <mat-progress-bar mode="determinate" [value]="(currentWordIndex / totalWords) * 100"></mat-progress-bar>
+    <p>{{ currentWordIndex + 1 }}/{{ totalWords }}</p>
+  </div>
+</div>
+
+<div *ngIf="endGame">
+  <p>Game Over!</p>
+  <p>Your Points: {{ points }}</p>
+  <p>Success Rate: {{ sumSuccess }}</p>
+</div>
+
