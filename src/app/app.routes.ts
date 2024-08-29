@@ -7,6 +7,9 @@ import { HelpComponent } from './help/help.component';
 import { MixedLettersComponent } from './mixed letters/mixed letters.component';
 import { WordSorterComponent } from './word sorter/word sorter.component';
 import { CategorySelectionComponent } from './Category selection/Category selection.component';
+import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
+import { FailureDialogComponent } from './failure-dialog/failure-dialog.component';
+import { ExitButtonComponent } from './exit-button/exit-button.component';
 
 export const routes: Routes = [
     {path: "Admin", component: CategoriesListComponent},
@@ -18,5 +21,8 @@ export const routes: Routes = [
     {path: 'mixed-letters/:id', component: MixedLettersComponent},
     {path: 'word-sorter/:id', component: WordSorterComponent},
     {path: "Category-selection", component: CategorySelectionComponent},
+    {path: "success-dialog", component: SuccessDialogComponent},
+    {path: "failure-dialog", component: FailureDialogComponent},
+    {path: "exit-button", component: ExitButtonComponent}
     
 ];

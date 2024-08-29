@@ -1,0 +1,28 @@
+.dialog-title {
+    font-weight: bold;
+    color: #3f51b5; 
+  }
+  
+  .dialog-content p {
+    margin: 0;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .dialog-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .dialog-button {
+    min-width: 80px;
+  }
+  
+  .exit-button {
+    background-color: #f44336; 
+    color: white;
+  }
+  
+  .cancel-button {
+    color: #3f51b5; 
+  }

@@ -2,3 +2,38 @@
     <div>mixed letters</div>
     <div> category name {{currentCategory?.name}}</div>
 </div>
+
+<div> 
+    <app-exit-button></app-exit-button>
+</div>
+
+<div class="game-container">
+    <mat-progress-bar mode="determinate" [value]="(currentWordIndex + 1) / totalWords * 100"></mat-progress-bar>
+    <div class="progress-info">
+      <span>{{ currentWordIndex + 1 }} / {{ totalWords }}</span>
+    </div>
+    
+    <div *ngIf="currentCategory">
+        <!-- Show the words or other properties here -->
+      </div>
+
+
+    <div class="word-container">
+        <p *ngIf="currentCategory && currentCategory.words">
+            {{ currentCategory.words[currentWordIndex].origin }}
+          </p>
+          <p>{{ mixWord }}</p>
+    </div>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Enter the correct word</mat-label>
+      <input matInput [(ngModel)]="userInput">
+    </mat-form-field>
+  
+    <div class="actions">
+      <button mat-button (click)="onSubmit()" [disabled]="!userInput.trim()">Submit</button>
+      <button mat-button (click)="onReset()">Reset</button>
+
+    </div>
+  
+   
