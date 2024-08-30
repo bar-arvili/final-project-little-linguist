@@ -14,7 +14,8 @@ import { ExitButtonComponent } from '../exit-button/exit-button.component';
 import { TranslatedWord } from '../../shared/model/translated-word';
 import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
 import { ViewPointsComponent } from '../view-points/view-points.component';
-import { SummaryDialogComponent } from '../../summary-dialog/summary-dialog.component';
+import { SummaryDialogComponent } from '../summary-dialog/summary-dialog.component';
+
 
 @Component({
   selector: 'app-mixed-letters',
@@ -33,7 +34,7 @@ export class MixedLettersComponent implements OnInit {
 
   currentCategory?: Category;
   words?: TranslatedWord[]; 
-  wordOrder: number[] = []; // מערך לשמירת סדר הצגת המילים
+  wordOrder: number[] = []; 
   currentWordIndex: number = 0;
   mixWord: string = '';
   endGame: boolean = false;
@@ -52,12 +53,10 @@ export class MixedLettersComponent implements OnInit {
     this.startGame();
   }
 
-  // פונקציה ראשית שמתחילה את התהליך
   startGame(): void {
     this.getCategoryInfo();
   }
 
-  // קבלת פרטי קטגוריה
   getCategoryInfo(): void {
     this.currentCategory = this.categoriesService.get(parseInt(this.id));
     if (this.currentCategory && this.currentCategory.words) {
@@ -65,60 +64,69 @@ export class MixedLettersComponent implements OnInit {
     } 
   }
 
-  // יצירת מערך עם מילים הקטגוריה בסדר אקראי
   createWordsArray(): void {
-    this.words = this.shuffleArray(this.currentCategory?.words || []); // ערבוב המערך
-    this.totalWords = this.words.length; // ספירת כמות המילים
-    this.wordPoints = Math.floor(100 / this.totalWords); // חישוב מספר הנקודות 
-    this.points = 0; // אתחול נקודות ל-0
-    this.createWordOrder(); // יצירת סדר אקראי להצגת המילים
-    this.presentWord(); // הצגת המילה הראשונה
+    this.words = this.shuffleArray(this.currentCategory?.words || []); 
+    this.totalWords = this.words.length; 
+    this.wordPoints = Math.floor(100 / this.totalWords); 
+    this.points = 0; 
+    this.createWordOrder(); 
+    this.presentWord(); 
   }
 
-  // יצירת סדר אקראי של אינדקסים
+  
   createWordOrder(): void {
-    this.wordOrder = Array.from({ length: this.totalWords }, (_, i) => i); // יוצרים מערך של אינדקסים
+    this.wordOrder = Array.from({ length: this.totalWords }, (_, i) => i); 
   }
 
   presentWord(): void {
-    const currentIndex = this.wordOrder[this.currentWordIndex]; // קבלת האינדקס הנוכחי במערך המוקטן
-    const currentWord = this.words?.[currentIndex]; // גישה למילה לפי האינדקס האקראי
-    this.mixWord = this.shuffleString(currentWord?.origin || ''); // ערבוב אותיות המילה
+    const currentIndex = this.wordOrder[this.currentWordIndex]; 
+    const currentWord = this.words?.[currentIndex]; 
+    this.mixWord = this.shuffleString(currentWord?.origin || ''); 
   }
 
  
   totalSuccessPoints(): void {
     this.sumSuccess = this.sumSuccess / this.totalWords;
-    // this.showSummary();
+    this.showSummary();
   }
 
-  // פונקציות עזר
+  
   shuffleArray(array: TranslatedWord[]): TranslatedWord[] {
-    return array.sort(() => Math.random() - 0.5); // ערבוב רנדומלי של מערך אובייקטים
+    return array.sort(() => Math.random() - 0.5); 
   }
 
 
   shuffleString(string: string): string {
-    return string.split('').sort(() => Math.random() - 0.5).join(''); // Shuffle letters within the word
-  }
+    const array = string.split('');
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array.join('');
+}
 
   reset() {
     this.userInput = '';
   }
 
   submit(userInput: string): void {
-    this.userInput = userInput; // קליטת תשובות מהמשתמש
-    const currentIndex = this.wordOrder[this.currentWordIndex]; // קבלת האינדקס הנוכחי במערך המוקטן
-    const currentWord = this.words?.[currentIndex]; // גישה למילה לפי האינדקס האקראי
-    const isSuccess = this.userInput.toLowerCase() == currentWord?.origin.toLowerCase(); // השוואה בין התשובה של המשתמש לנכונה
-    const isEndOfGame = this.currentWordIndex + 1 == this.wordOrder.length; // בדיקה אם המשחק הסתיים
+    this.userInput = userInput; 
+    const currentIndex = this.wordOrder[this.currentWordIndex]; 
+    const currentWord = this.words?.[currentIndex]; 
+    const isSuccess = this.userInput.toLowerCase() == currentWord?.origin.toLowerCase(); 
+    const isEndOfGame = this.currentWordIndex + 1 == this.wordOrder.length; 
     
+    if (currentWord) {
+      currentWord.guess = this.userInput;
+    }
+
+
     if (!isEndOfGame) {
       this.dialog.open(isSuccess ? SuccessDialogComponent : FailureDialogComponent, {
         data: isSuccess,
       }).afterClosed();
 
-        this.moveToNextWord(); // מעבר למילה הבאה לאחר סגירת הדיאלוג
+        this.moveToNextWord(); 
       };
     
     if (isSuccess) {
@@ -129,6 +137,7 @@ export class MixedLettersComponent implements OnInit {
     if (isEndOfGame) {
       this.endGame = true;
       this.totalSuccessPoints();
+      this.showSummary();
     }
   }
 
@@ -145,17 +154,17 @@ export class MixedLettersComponent implements OnInit {
 
 
   showSummary(): void {
-    // הכנת הנתונים לסיכום
-    const summaryData = this.words?.map((word, index) => {
+
+    const summaryData = this.words?.map((word) => {
       const isCorrect = word.guess?.toLowerCase() === word.origin.toLowerCase();
       return {
-        hebrewWord: word.target, // מניחים שזו המילה בעברית
-        correctEnglishWord: word.origin, // המילה באנגלית
-        isCorrect: isCorrect // האם הניחוש היה נכון
+        hebrewWord: word.target, 
+        correctEnglishWord: word.origin, 
+        isCorrect: isCorrect 
       };
     }) || [];
 
-    // פתיחת הדיאלוג עם הנתונים
+   
     this.dialog.open(SummaryDialogComponent, {
       data: {
         points: this.points,
@@ -174,3 +183,4 @@ export class MixedLettersComponent implements OnInit {
     return (this.currentWordIndex / this.totalWords) * 100;
   }
 }
+

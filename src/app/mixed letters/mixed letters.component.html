@@ -27,14 +27,16 @@
   <div class="input-container">
     <mat-form-field appearance="outline">
       <mat-label>Guess:</mat-label>
-      <input matInput [(ngModel)]="userInput" name="{{ userInput }}" placeholder="Enter correct English word"/>
+      <input matInput [(ngModel)]="userInput" name="{{ userInput }}" placeholder="Enter correct English word" />
     </mat-form-field>
     <div class="button-container">
-      <button mat-raised-button color="primary" class="submit" (click)="submit(userInput)">Submit</button>
+      <button mat-raised-button color="primary" class="submit" (click)="submit(userInput)"
+        [disabled]="!userInput.trim()">Submit</button>
+
       <button mat-raised-button color="primary" (click)="reset()">Reset</button>
     </div>
   </div>
-  
+
 
   <div class="progress-container">
     <mat-progress-bar mode="determinate" [value]="(currentWordIndex / totalWords) * 100"></mat-progress-bar>
@@ -44,8 +46,4 @@
 
 <div *ngIf="endGame">
   <p>Game Over!</p>
-  <p>Your Points: {{ points }}</p>
-  <p>Success Rate: {{ sumSuccess }}</p>
 </div>
-
-

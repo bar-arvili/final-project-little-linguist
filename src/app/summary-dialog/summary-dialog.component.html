@@ -5,19 +5,19 @@
 
   <mat-table [dataSource]="data.summaryData" class="mat-elevation-z8">
     
-    <!-- Hebrew Word Column -->
+ 
     <ng-container matColumnDef="hebrewWord">
       <th mat-header-cell *matHeaderCellDef> Hebrew Word </th>
       <td mat-cell *matCellDef="let element"> {{element.hebrewWord}} </td>
     </ng-container>
 
-    <!-- Correct English Word Column -->
+ 
     <ng-container matColumnDef="correctEnglishWord">
       <th mat-header-cell *matHeaderCellDef> Correct English Word </th>
       <td mat-cell *matCellDef="let element"> {{element.correctEnglishWord}} </td>
     </ng-container>
 
-    <!-- Result Column -->
+   
     <ng-container matColumnDef="isCorrect">
       <th mat-header-cell *matHeaderCellDef> Result </th>
       <td mat-cell *matCellDef="let element">
@@ -25,7 +25,7 @@
       </td>
     </ng-container>
 
-    <!-- Header and Row Definitions -->
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   
