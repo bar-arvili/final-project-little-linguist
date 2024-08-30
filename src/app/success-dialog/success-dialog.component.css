@@ -1,0 +1,40 @@
+.dialog-container {
+    width: 500px;
+    height: 500px;
+    text-align: center;
+    padding: 20px;
+    background-color: #4CAF50; 
+    border-radius: 8px;
+  }
+  
+  .icon-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .success-icon {
+    font-size: 2em;
+    color: white;
+    margin-right: 8px;
+  }
+  
+  .dialog-title {
+    font-size: 1.8em;
+    color: white;
+  }
+  
+  .dialog-message {
+    font-size: 1.2em;
+    color: #f5f5f5;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    background-color: #e0e0e0; 
+    font-size: 1.2em;
+    border-radius: 4px;
+    padding: 8px 16px;
+    color: black;
+  }

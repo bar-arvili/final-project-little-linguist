@@ -7,6 +7,10 @@
   <mat-icon>exit_to_app</mat-icon>
 </button>
 
+<div class="container">
+  <app-view-points [points]="points"></app-view-points>
+</div>
+
 
 <div *ngIf="!endGame">
   <div class="word-container">
@@ -23,13 +27,14 @@
   <div class="input-container">
     <mat-form-field appearance="outline">
       <mat-label>Guess:</mat-label>
-      <input matInput #userGuess placeholder="Enter correct English word" />
+      <input matInput [(ngModel)]="userInput" name="{{ userInput }}" placeholder="Enter correct English word"/>
     </mat-form-field>
     <div class="button-container">
-      <button mat-raised-button color="primary" class="submit" (click)="submit(userGuess.value)">Submit</button>
-      <button mat-raised-button color="accent" class="reset" (click)="reset()">Reset</button>
+      <button mat-raised-button color="primary" class="submit" (click)="submit(userInput)">Submit</button>
+      <button mat-raised-button color="primary" (click)="reset()">Reset</button>
     </div>
   </div>
+  
 
   <div class="progress-container">
     <mat-progress-bar mode="determinate" [value]="(currentWordIndex / totalWords) * 100"></mat-progress-bar>
@@ -42,4 +47,5 @@
   <p>Your Points: {{ points }}</p>
   <p>Success Rate: {{ sumSuccess }}</p>
 </div>
+
 
