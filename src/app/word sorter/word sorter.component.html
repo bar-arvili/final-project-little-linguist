@@ -2,3 +2,29 @@
     <div>word sorter</div>
     <div> category name {{currentCategory?.name}}</div>
 </div>
+
+<div class="container">
+  <app-view-points [points]="sortingPoints"></app-view-points>
+</div>
+
+<div class="container">
+  <div class="category-title">
+    <h3>Is this word "{{ currentSortingWord?.origin }}" part of the category "{{ currentCategory?.name }}"?</h3>
+  </div>
+
+
+  <div class="sorting-options">
+    <button mat-raised-button color="primary" (click)="checkSortingAnswer(true)">YES</button>
+    <button mat-raised-button color="warn" (click)="checkSortingAnswer(false)">NO</button>
+  </div>
+
+  <div class="progress-container">
+    <span> word {{ currentSortingWordIndex + 1 }} / {{ totalSortingWords }}</span>
+    <mat-progress-bar mode="determinate" [value]="progressValue"></mat-progress-bar>
+  </div>
+
+ 
+
+  <button mat-icon-button (click)="exit()">
+    <mat-icon>exit_to_app</mat-icon>
+  </button>

@@ -16,7 +16,6 @@ import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
 import { ViewPointsComponent } from '../view-points/view-points.component';
 import { SummaryDialogComponent } from '../summary-dialog/summary-dialog.component';
 
-
 @Component({
   selector: 'app-mixed-letters',
   standalone: true,
