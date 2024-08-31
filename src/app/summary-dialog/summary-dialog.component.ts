@@ -11,7 +11,8 @@ import { MatTableModule } from '@angular/material/table';
   templateUrl: './summary-dialog.component.html',
   styleUrl: './summary-dialog.component.css'
 })
-export class SummaryDialogComponent { 
+export class SummaryDialogComponent {
+[x: string]: any; 
   displayedColumns: string[] = ['hebrewWord', 'correctEnglishWord', 'isCorrect'];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}

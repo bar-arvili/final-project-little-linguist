@@ -1,49 +1,52 @@
-<div class="container">
-  <div>Mixed Letters</div>
-  <div>Category Name {{ currentCategory?.name }}</div>
+<div class="header-container">
+  <div class="title-container">
+    <div class="title">Mixed Letters</div>
+    <div class="category-name">Category name {{ currentCategory?.name }}</div>
+  </div>
+
+  <button mat-icon-button class="exit-button" (click)="exit()">
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
 </div>
 
-<button mat-icon-button (click)="exit()">
-  <mat-icon>exit_to_app</mat-icon>
-</button>
-
-<div class="container">
+<div class="points-container">
   <app-view-points [points]="points"></app-view-points>
 </div>
 
+<div *ngIf="!gameEnded" class="game-content">
 
-<div *ngIf="!endGame">
   <div class="word-container">
-    <div class="hebrew-word">
+    <div class="hebrew-word-container">
       <p class="label">Meaning in Hebrew:</p>
-      <span class="hebrew">{{ words?.[currentWordIndex]?.target }}</span>
+      <span class="hebrew-word">{{ words?.[currentWordIndex]?.target }}</span>
     </div>
-    <div class="english-word">
+    <div class="english-word-container">
       <p class="label">Mixed English Letters:</p>
-      <span class="english">{{ mixWord }}</span>
+      <span class="english-word">{{ shuffledWord }}</span>
     </div>
   </div>
 
   <div class="input-container">
-    <mat-form-field appearance="outline">
-      <mat-label>Guess:</mat-label>
-      <input matInput [(ngModel)]="userInput" name="{{ userInput }}" placeholder="Enter correct English word" />
+    <mat-form-field appearance="outline" class="guess-field">
+      <mat-label>Your answer:</mat-label>
+      <input matInput [(ngModel)]="userInput" placeholder="Enter correct English word" />
     </mat-form-field>
-    <div class="button-container">
-      <button mat-raised-button color="primary" class="submit" (click)="submit(userInput)"
-        [disabled]="!userInput.trim()">Submit</button>
-
-      <button mat-raised-button color="primary" (click)="reset()">Reset</button>
-    </div>
   </div>
 
+  <div class="button-container">
+    <button mat-raised-button color="primary" class="submit-button" (click)="submit(userInput)"
+      [disabled]="!userInput.trim()">Submit</button>
+
+    <button mat-raised-button color="primary" class="reset-button" (click)="reset()">Reset</button>
+  </div>
 
   <div class="progress-container">
     <mat-progress-bar mode="determinate" [value]="(currentWordIndex / totalWords) * 100"></mat-progress-bar>
-    <p>{{ currentWordIndex + 1 }}/{{ totalWords }}</p>
+    <p class="progress-text">{{ currentWordIndex + 1 }}/{{ totalWords }}</p>
   </div>
+
 </div>
 
-<div *ngIf="endGame">
+<div *ngIf="gameEnded" class="game-over">
   <p>Game Over!</p>
 </div>

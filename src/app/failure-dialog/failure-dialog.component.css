@@ -1,21 +1,45 @@
-
 .dialog-container {
-    width: 500px;
-    height: 500px;
-    text-align: center;
-    color: red;
-  }
-  
-  .failure-icon {
-    font-size: 2em;
-    color: red;
-  }
-  
-  h1 {
-    font-size: 2em;
-    margin-top: 10px;
-  }
-  
-  p {
-    font-size: 1.2em;
-  }
+  text-align: center;
+  padding: 40px; 
+  max-width: 500px; 
+  margin: 0 auto;
+}
+
+.mat-icon {
+  font-size: 20px; 
+  margin-bottom: 20px;
+}
+
+button {
+  margin-top: 30px;
+  font-size: 18px; 
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  width: 100px;
+  cursor: pointer;
+}
+
+.failure-dialog .failure-icon {
+  color: #f44336; 
+}
+
+.failure-dialog .failure-title {
+  color: #f44336; 
+  font-size: 28px; 
+  font-weight: bold;
+}
+
+.failure-dialog .failure-message {
+  color: #d32f2f; 
+  font-size: 20px; 
+}
+
+.failure-button {
+  background-color: #f44336; 
+  color: #fff;
+}
+
+.failure-button:hover {
+  background-color: #d32f2f; 
+}

@@ -35,9 +35,9 @@ export class MixedLettersComponent implements OnInit {
   words?: TranslatedWord[]; 
   wordOrder: number[] = []; 
   currentWordIndex: number = 0;
-  mixWord: string = '';
-  endGame: boolean = false;
-  sumSuccess: number = 0;
+  shuffledWord: string = '';
+  gameEnded: boolean = false;
+  successCount: number = 0;
   userInput = '';
   points = 0;
   wordPoints: number = 0;
@@ -49,111 +49,75 @@ export class MixedLettersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.startGame();
-  }
-
-  startGame(): void {
-    this.getCategoryInfo();
-  }
-
-  getCategoryInfo(): void {
     this.currentCategory = this.categoriesService.get(parseInt(this.id));
-    if (this.currentCategory && this.currentCategory.words) {
-      this.createWordsArray();
-    } 
+    if (this.currentCategory?.words) {
+      this.setupGame();
+    }
   }
 
-  createWordsArray(): void {
+  setupGame(): void {
     this.words = this.shuffleArray(this.currentCategory?.words || []); 
     this.totalWords = this.words.length; 
     this.wordPoints = Math.floor(100 / this.totalWords); 
     this.points = 0; 
-    this.createWordOrder(); 
-    this.presentWord(); 
-  }
-
-  
-  createWordOrder(): void {
     this.wordOrder = Array.from({ length: this.totalWords }, (_, i) => i); 
+    this.presentWord(); 
   }
 
   presentWord(): void {
     const currentIndex = this.wordOrder[this.currentWordIndex]; 
     const currentWord = this.words?.[currentIndex]; 
-    this.mixWord = this.shuffleString(currentWord?.origin || ''); 
-  }
-
- 
-  totalSuccessPoints(): void {
-    this.sumSuccess = this.sumSuccess / this.totalWords;
-    this.showSummary();
-  }
-
-  
-  shuffleArray(array: TranslatedWord[]): TranslatedWord[] {
-    return array.sort(() => Math.random() - 0.5); 
-  }
-
-
-  shuffleString(string: string): string {
-    const array = string.split('');
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array.join('');
-}
-
-  reset() {
-    this.userInput = '';
+    this.shuffledWord = this.shuffleString(currentWord?.origin || ''); 
   }
 
   submit(userInput: string): void {
     this.userInput = userInput; 
     const currentIndex = this.wordOrder[this.currentWordIndex]; 
     const currentWord = this.words?.[currentIndex]; 
-    const isSuccess = this.userInput.toLowerCase() == currentWord?.origin.toLowerCase(); 
-    const isEndOfGame = this.currentWordIndex + 1 == this.wordOrder.length; 
+    const isCorrect = this.userInput.toLowerCase() === currentWord?.origin.toLowerCase(); 
+    const isLastWord = this.currentWordIndex + 1 === this.wordOrder.length; 
     
     if (currentWord) {
       currentWord.guess = this.userInput;
     }
 
-
-    if (!isEndOfGame) {
-      this.dialog.open(isSuccess ? SuccessDialogComponent : FailureDialogComponent, {
-        data: isSuccess,
-      }).afterClosed();
-
-        this.moveToNextWord(); 
-      };
-    
-    if (isSuccess) {
-      this.sumSuccess++;
+    if (isCorrect) {
+      this.successCount++;
       this.points += this.wordPoints;
     } 
 
-    if (isEndOfGame) {
-      this.endGame = true;
-      this.totalSuccessPoints();
-      this.showSummary();
-    }
-  }
+    if (!isLastWord) {
+      this.dialog.open(isCorrect ? SuccessDialogComponent : FailureDialogComponent, {
+        data: isCorrect,
+      }).afterClosed();
 
-  moveToNextWord(): void {
-    this.userInput = '';
-    this.currentWordIndex++;
-    if (this.currentWordIndex < this.totalWords) {
+      this.currentWordIndex++;
       this.presentWord();
     } else {
+      this.gameEnded = true;
       this.showSummary();
-      this.endGame = true;
     }
+    this.userInput = '';
+}
+  shuffleArray(array: TranslatedWord[]): TranslatedWord[] {
+    return array.sort(() => Math.random() - 0.5); 
   }
 
+  shuffleString(string: string): string {
+    let array = string.split('');
+    let shuffledArray = array.slice(); 
+
+    do {
+        for (let i = shuffledArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+        }
+    } while (shuffledArray.join('') === string);
+
+    return shuffledArray.join('');
+}
 
   showSummary(): void {
-
     const summaryData = this.words?.map((word) => {
       const isCorrect = word.guess?.toLowerCase() === word.origin.toLowerCase();
       return {
@@ -163,16 +127,21 @@ export class MixedLettersComponent implements OnInit {
       };
     }) || [];
 
-   
     this.dialog.open(SummaryDialogComponent, {
       data: {
         points: this.points,
         totalWords: this.totalWords,
-        sumSuccess: this.sumSuccess,
+        successCount: this.successCount,
         summaryData: summaryData
       }
     });
   }
+
+
+  reset(): void {
+    this.userInput = '';
+  }
+  
 
   exit(): void {
     this.dialog.open(ExitDialogComponent);
@@ -182,4 +151,3 @@ export class MixedLettersComponent implements OnInit {
     return (this.currentWordIndex / this.totalWords) * 100;
   }
 }
-

@@ -1,0 +1,75 @@
+.mat-dialog-container {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1[mat-dialog-title] {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #3f51b5; 
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+
+.mat-dialog-content p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+
+.mat-table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+th.mat-header-cell {
+    background-color: #f0f0f0;
+    color: #3f51b5; 
+    font-weight: bold;
+    text-align: center;
+}
+
+td.mat-cell {
+    text-align: center;
+    color: #555;
+    font-size: 16px;
+    padding: 10px;
+}
+
+
+.mat-icon {
+    font-size: 24px !important; 
+    vertical-align: middle; 
+}
+
+.mat-icon.cancel {
+    color: #f44336 !important; 
+}
+
+.mat-icon.check_circle {
+    color: #4caf50 !important; 
+}
+
+
+button[mat-button] {
+    background-color: #3f51b5;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 20px auto 0 auto;
+    display: block;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[mat-button]:hover {
+    background-color: #303f9f;
+}

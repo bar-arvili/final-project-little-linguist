@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Game Summary</h1>
 <div mat-dialog-content>
   <p><strong>Points:</strong> {{ data.points }}</p>
-  <p><strong>Successful Guesses:</strong> {{ data.sumSuccess }}</p>
+  <p><strong>Successful Guesses:</strong> {{ data.successCount }}</p>
 
   <mat-table [dataSource]="data.summaryData" class="mat-elevation-z8">
     
