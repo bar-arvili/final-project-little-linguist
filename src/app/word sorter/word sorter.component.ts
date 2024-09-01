@@ -11,13 +11,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ViewPointsComponent } from "../view-points/view-points.component";
+import { MatTableModule } from '@angular/material/table';
 
 
 @Component({
   selector: 'app-word-sorter',
   standalone: true,
   imports: [
-    CommonModule, MatDialogModule, MatButtonModule, MatProgressBarModule, MatIconModule,
+    CommonModule, MatDialogModule, MatButtonModule, MatProgressBarModule, MatIconModule,MatTableModule,
     ViewPointsComponent
 ],
   templateUrl: './word sorter.component.html',
@@ -38,6 +39,8 @@ export class WordSorterComponent implements OnInit {
   pointsPerWord: number = 0;
   totalSortingWords: number = 6;
   progressValue: number = 0;
+  summaryData: any[] = [];
+  isGameFinished: boolean = false;
 
   constructor(
     private categoriesService: CategoriesService, 
@@ -47,81 +50,80 @@ export class WordSorterComponent implements OnInit {
   ngOnInit(): void {
     this.categories = this.categoriesService.list(); 
     this.currentCategory = this.categoriesService.get(parseInt(this.id)); 
-    this.generateRandomCategory();
-    this.generateWordsArray();
+    this.randomCategory = this.getRandomCategory();
+    this.initializeWordsAndPoints();
     this.presentNextSortingWord(); 
   }
 
-  generateRandomCategory(): void { 
-    this.randomCategory = this.categories[Math.floor(Math.random() * this.categories.length)];
+  private getRandomCategory(): Category | undefined {
+    const filteredCategories = this.categories.filter(category => category.id !== this.currentCategory?.id);
+    return filteredCategories[Math.floor(Math.random() * filteredCategories.length)];
   }
 
-  generateWordsArray(): void {
- 
+  private initializeWordsAndPoints(): void {
     if (!this.currentCategory || !this.randomCategory) {
       console.error("Category information is missing.");
       return;
     }
-    const selectedCategoryWords = this.shuffleArray(this.currentCategory.words).slice(0, 3);
-    const randomCategoryWords = this.shuffleArray(this.randomCategory.words).slice(0, 3);
+    const selectedCategoryWords = this.shuffleArray(this.currentCategory?.words ?? []).slice(0, 3);
+    const randomCategoryWords = this.shuffleArray(this.randomCategory?.words ?? []).slice(0, 3);
     this.words = this.shuffleArray([...selectedCategoryWords, ...randomCategoryWords]);
     this.pointsPerWord = Math.floor(100 / this.totalSortingWords);
   }
 
   shuffleArray(array: TranslatedWord[]): TranslatedWord[] {
-    return array.sort(() => Math.random() - 0.5); 
-}
+    return array.sort(() => Math.random() - 0.5);
+  }
 
 
-presentNextSortingWord(): void {
+  presentNextSortingWord(): void {
+    if (this.currentSortingWordIndex < this. totalSortingWords) { 
+      this.currentSortingWord = this.words[this.currentSortingWordIndex]; 
+    } else {
+      this.endSortingGame();
+    }
+  }
 
-  if (this.currentSortingWordIndex < this.words.length) { 
-    this.currentSortingWord = this.words[this.currentSortingWordIndex]; 
-    this.progressValue = (this.currentSortingWordIndex / this.totalSortingWords) * 100; 
-  } else {
-    this.endSortingGame();
+  checkSortingAnswer(isCorrect: boolean): void {
+    if (!this.currentSortingWord || !this.currentCategory) {
+      console.error("Current word or category information is missing.");
+      return;
+    }
+  
+    const isAnswerCorrect = isCorrect === this.currentCategory.words.includes(this.currentSortingWord);
+  
+    this.dialog.open(isAnswerCorrect ? SuccessDialogComponent : FailureDialogComponent);
+  
+    const correctCategory = this.currentCategory.words.includes(this.currentSortingWord)
+    ? this.currentCategory.name
+    : this.randomCategory?.name;
+
+  this.summaryData.push({
+    englishWord: this.currentSortingWord.origin,
+    category: correctCategory,
+    isCorrect: isAnswerCorrect
+  });
+  
+    if (isAnswerCorrect) {
+      this.sortingPoints += this.pointsPerWord; 
+    }
+  
+    this.currentSortingWordIndex++;
+    this.progressValue = (this.currentSortingWordIndex / this.totalSortingWords) * 100;
+  
+    this.presentNextSortingWord(); 
+  }
+
+  private endSortingGame(): void {
+    this.isGameFinished = true;
+    const allCorrect = this.summaryData.every(item => item.isCorrect);
+    if (allCorrect) {
+      this.sortingPoints = 100;
+    }
+  }
+
+  exit(): void {
+    this.dialog.open(ExitDialogComponent); 
   }
 }
 
-checkSortingAnswer(isCorrect: boolean): void {
-
-  const isAnswerCorrect = isCorrect == this.currentCategory?.words.includes(this.currentSortingWord!);
-
-  this.dialog.open(isAnswerCorrect ? SuccessDialogComponent : FailureDialogComponent).afterClosed().subscribe(() => {
-    // פתיחת דיאלוג הצלחה או כישלון לפי התשובה.
-    
-    if (isAnswerCorrect) {
-      this.sortingPoints += this.pointsPerWord; // הוספת הנקודות במידה והתשובה נכונה.
-    }
-
-    if (this.currentSortingWordIndex + 1 < this.words.length) {
-      this.currentSortingWordIndex++;
-      this.presentNextSortingWord(); // הצגת המילה הבאה.
-    } else {
-      this.endSortingGame(); // אם אין מילים נוספות, סיום המשחק.
-    }
-  });
-}
-
-endSortingGame(): void {
-  this.showSortingSummary();
-}
-
-showSortingSummary(): void {
-  const summaryData = this.words.map(word => {
-    const isCorrect = this.currentCategory?.words.includes(word);
-    return {
-      hebrewWord: word.target, // המילה בעברית.
-      correctEnglishWord: word.origin, // המילה באנגלית.
-      isCorrect: isCorrect // האם השחקן שייך את המילה נכון.
-    };
-  });
-
-  // MatTable להציג את הנתונים בסיכום בעמודות מסודרות.
-}
-
-
-exit(): void {
-  this.dialog.open(ExitDialogComponent); 
-}
-}

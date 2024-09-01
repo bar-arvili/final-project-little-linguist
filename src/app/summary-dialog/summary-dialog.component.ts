@@ -3,16 +3,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-summary-dialog',
   standalone: true,
-  imports: [MatIconModule,MatTableModule,MatButtonModule,MatDialogModule],
+  imports: [MatIconModule,MatTableModule,MatButtonModule,MatDialogModule,RouterModule],
   templateUrl: './summary-dialog.component.html',
   styleUrl: './summary-dialog.component.css'
 })
 export class SummaryDialogComponent {
-[x: string]: any; 
+
   displayedColumns: string[] = ['hebrewWord', 'correctEnglishWord', 'isCorrect'];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}

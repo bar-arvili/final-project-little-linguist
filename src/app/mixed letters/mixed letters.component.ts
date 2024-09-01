@@ -131,7 +131,7 @@ export class MixedLettersComponent implements OnInit {
       data: {
         points: this.points,
         totalWords: this.totalWords,
-        successCount: this.successCount,
+        successCount: `${this.successCount} / ${this.totalWords}`,
         summaryData: summaryData
       }
     });

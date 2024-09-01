@@ -24,7 +24,19 @@ body {
   margin-bottom: 10px;
 }
 
+.exit-button {
+  position: absolute;
+  top: 6000px; 
+  right: 500px; 
+}
+
 .container > div:nth-of-type(2) {
   font-size: 1.2em;
   color: #666;
 }
+
+.progress-container {
+  width: 100%;
+}
+
+
