@@ -42,6 +42,7 @@ export class WordSorterComponent implements OnInit {
   summaryData: any[] = [];
   isGameFinished: boolean = false;
 
+
   constructor(
     private categoriesService: CategoriesService, 
     private dialog: MatDialog
