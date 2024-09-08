@@ -9,15 +9,20 @@ import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
 @Component({
   selector: 'app-exit-button',
   standalone: true,
-  imports: [MatDialogModule, RouterModule,  MatSelectModule,MatButtonModule, MatIconModule],
+  imports: [
+    MatDialogModule,
+    RouterModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './exit-button.component.html',
-  styleUrl: './exit-button.component.css'
+  styleUrl: './exit-button.component.css',
 })
 export class ExitButtonComponent {
-
   constructor(public dialog: MatDialog) {}
 
   openExitDialog(): void {
-    this.dialog.open(ExitDialogComponent); 
+    this.dialog.open(ExitDialogComponent);
   }
 }

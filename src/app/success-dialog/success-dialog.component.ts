@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-success-dialog',
   standalone: true,
-  imports: [MatIconModule,MatButtonModule,MatDialogModule],
+  imports: [MatIconModule, MatButtonModule, MatDialogModule],
   templateUrl: './success-dialog.component.html',
-  styleUrl: './success-dialog.component.css'
+  styleUrl: './success-dialog.component.css',
 })
-export class SuccessDialogComponent {
-
-}
+export class SuccessDialogComponent {}

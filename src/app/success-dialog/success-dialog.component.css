@@ -1,18 +1,18 @@
 .dialog-container {
   text-align: center;
-  padding: 40px; 
-  max-width: 500px; 
+  padding: 40px;
+  max-width: 500px;
   margin: 0 auto;
 }
 
 .mat-icon {
-  font-size: 20px; 
+  font-size: 20px;
   margin-bottom: 20px;
 }
 
 button {
   margin-top: 30px;
-  font-size: 18px; 
+  font-size: 18px;
   padding: 10px 20px;
   border-radius: 5px;
   font-weight: bold;
@@ -21,25 +21,25 @@ button {
 }
 
 .success-dialog .success-icon {
-  color: #4caf50; 
+  color: #4caf50;
 }
 
 .success-dialog .success-title {
-  color: #4caf50; 
-  font-size: 28px; 
+  color: #4caf50;
+  font-size: 28px;
   font-weight: bold;
 }
 
 .success-dialog .success-message {
-  color: #388e3c; 
-  font-size: 20px; 
+  color: #388e3c;
+  font-size: 20px;
 }
 
 .success-button {
-  background-color: #4caf50; 
+  background-color: #4caf50;
   color: #fff;
 }
 
 .success-button:hover {
-  background-color: #388e3c; 
+  background-color: #388e3c;
 }

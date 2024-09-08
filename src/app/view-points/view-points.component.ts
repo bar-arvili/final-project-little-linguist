@@ -6,8 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [MatIconModule],
   templateUrl: './view-points.component.html',
-  styleUrl: './view-points.component.css'
+  styleUrl: './view-points.component.css',
 })
 export class ViewPointsComponent {
-@Input() points : number = 0; 
+  @Input() points: number = 0;
 }

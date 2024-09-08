@@ -1,18 +1,18 @@
 .dialog-container {
   text-align: center;
-  padding: 40px; 
-  max-width: 500px; 
+  padding: 40px;
+  max-width: 500px;
   margin: 0 auto;
 }
 
 .mat-icon {
-  font-size: 20px; 
+  font-size: 20px;
   margin-bottom: 20px;
 }
 
 button {
   margin-top: 30px;
-  font-size: 18px; 
+  font-size: 18px;
   padding: 10px 20px;
   border-radius: 5px;
   font-weight: bold;
@@ -21,25 +21,25 @@ button {
 }
 
 .failure-dialog .failure-icon {
-  color: #f44336; 
+  color: #f44336;
 }
 
 .failure-dialog .failure-title {
-  color: #f44336; 
-  font-size: 28px; 
+  color: #f44336;
+  font-size: 28px;
   font-weight: bold;
 }
 
 .failure-dialog .failure-message {
-  color: #d32f2f; 
-  font-size: 20px; 
+  color: #d32f2f;
+  font-size: 20px;
 }
 
 .failure-button {
-  background-color: #f44336; 
+  background-color: #f44336;
   color: #fff;
 }
 
 .failure-button:hover {
-  background-color: #d32f2f; 
+  background-color: #d32f2f;
 }

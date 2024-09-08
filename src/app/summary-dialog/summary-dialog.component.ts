@@ -8,14 +8,23 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-summary-dialog',
   standalone: true,
-  imports: [MatIconModule,MatTableModule,MatButtonModule,MatDialogModule,RouterModule],
+  imports: [
+    MatIconModule,
+    MatTableModule,
+    MatButtonModule,
+    MatDialogModule,
+    RouterModule,
+  ],
   templateUrl: './summary-dialog.component.html',
-  styleUrl: './summary-dialog.component.css'
+  styleUrl: './summary-dialog.component.css',
 })
 export class SummaryDialogComponent {
+  displayedColumns: string[] = [
+    'hebrewWord',
+    'correctEnglishWord',
+    'isCorrect',
+  ];
 
-  displayedColumns: string[] = ['hebrewWord', 'correctEnglishWord', 'isCorrect'];
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
-
 }

@@ -14,7 +14,6 @@
 </div>
 
 <div *ngIf="!gameEnded" class="game-content">
-
   <div class="word-container">
     <div class="hebrew-word-container">
       <p class="label">Meaning in Hebrew:</p>
@@ -29,22 +28,42 @@
   <div class="input-container">
     <mat-form-field appearance="outline" class="guess-field">
       <mat-label>Your answer:</mat-label>
-      <input matInput [(ngModel)]="userInput" placeholder="Enter correct English word" />
+      <input
+        matInput
+        [(ngModel)]="userInput"
+        placeholder="Enter correct English word"
+      />
     </mat-form-field>
   </div>
 
   <div class="button-container">
-    <button mat-raised-button color="primary" class="submit-button" (click)="submit(userInput)"
-      [disabled]="!userInput.trim()">Submit</button>
+    <button
+      mat-raised-button
+      color="primary"
+      class="submit-button"
+      (click)="submit(userInput)"
+      [disabled]="!userInput.trim()"
+    >
+      Submit
+    </button>
 
-    <button mat-raised-button color="primary" class="reset-button" (click)="reset()">Reset</button>
+    <button
+      mat-raised-button
+      color="primary"
+      class="reset-button"
+      (click)="reset()"
+    >
+      Reset
+    </button>
   </div>
 
   <div class="progress-container">
-    <mat-progress-bar mode="determinate" [value]="(currentWordIndex / totalWords) * 100"></mat-progress-bar>
+    <mat-progress-bar
+      mode="determinate"
+      [value]="(currentWordIndex / totalWords) * 100"
+    ></mat-progress-bar>
     <p class="progress-text">{{ currentWordIndex + 1 }}/{{ totalWords }}</p>
   </div>
-
 </div>
 
 <div *ngIf="gameEnded" class="game-over">

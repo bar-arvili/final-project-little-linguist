@@ -39,6 +39,7 @@ export class WordSorterComponent implements OnInit {
   pointsPerWord: number = 0;
   totalSortingWords: number = 6;
   progressValue: number = 0;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   summaryData: any[] = [];
   isGameFinished: boolean = false;
 

@@ -6,7 +6,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; 
+  height: 100vh;
   text-align: center;
 }
 
@@ -26,8 +26,8 @@ body {
 
 .exit-button {
   position: absolute;
-  top: 6000px; 
-  right: 500px; 
+  top: 6000px;
+  right: 500px;
 }
 
 .container > div:nth-of-type(2) {
@@ -38,5 +38,3 @@ body {
 .progress-container {
   width: 100%;
 }
-
-

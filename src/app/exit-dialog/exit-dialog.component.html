@@ -1,10 +1,18 @@
- <h1 mat-dialog-title class="dialog-title">Are you sure you want to exit the game?</h1>
-  
-  <div mat-dialog-content class="dialog-content">
-    <p>You will lose any unsaved progress. Do you really want to exit?</p>
-  </div>
-  
-  <div mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="true" [routerLink]="['/Game-selection']">YES</button>
-    <button mat-button mat-dialog-close>NO</button>
-  </div>
+<h1 mat-dialog-title class="dialog-title">
+  Are you sure you want to exit the game?
+</h1>
+
+<div mat-dialog-content class="dialog-content">
+  <p>You will lose any unsaved progress. Do you really want to exit?</p>
+</div>
+
+<div mat-dialog-actions>
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    [routerLink]="['/Game-selection']"
+  >
+    YES
+  </button>
+  <button mat-button mat-dialog-close>NO</button>
+</div>

@@ -1,7 +1,7 @@
 <div *ngIf="!isGameFinished; else summaryTemplate">
   <div class="container">
     <div>word sorter</div>
-    <div>category name {{currentCategory?.name}}</div>
+    <div>category name {{ currentCategory?.name }}</div>
   </div>
 
   <div class="container">
@@ -10,23 +10,43 @@
 
   <button mat-icon-button (click)="exit()">
     <mat-icon>exit_to_app</mat-icon>
-  </button> 
-  
+  </button>
+
   <div class="container">
     <div class="category-title">
-      <h3>Is this word "{{ currentSortingWord?.origin }}" part of the category "{{ currentCategory?.name }}"?</h3>
+      <h3>
+        Is this word "{{ currentSortingWord?.origin }}" part of the category "{{
+          currentCategory?.name
+        }}"?
+      </h3>
     </div>
 
     <div class="sorting-options">
-      <button mat-raised-button color="primary" (click)="checkSortingAnswer(true)">YES</button>
-      <button mat-raised-button color="warn" (click)="checkSortingAnswer(false)">NO</button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="checkSortingAnswer(true)"
+      >
+        YES
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="checkSortingAnswer(false)"
+      >
+        NO
+      </button>
     </div>
 
     <div class="progress-container">
-      <span> word {{ currentSortingWordIndex + 1 }} / {{ totalSortingWords }}</span>
-      <mat-progress-bar mode="determinate" [value]="progressValue"></mat-progress-bar>
+      <span>
+        word {{ currentSortingWordIndex + 1 }} / {{ totalSortingWords }}</span
+      >
+      <mat-progress-bar
+        mode="determinate"
+        [value]="progressValue"
+      ></mat-progress-bar>
     </div>
-
   </div>
 </div>
 
@@ -36,22 +56,30 @@
     <p>Total Points: {{ sortingPoints }}</p>
     <table mat-table [dataSource]="summaryData" class="mat-elevation-z8">
       <ng-container matColumnDef="englishWord">
-        <th mat-header-cell *matHeaderCellDef> English Word </th>
-        <td mat-cell *matCellDef="let element"> {{element.englishWord}} </td>
+        <th mat-header-cell *matHeaderCellDef>English Word</th>
+        <td mat-cell *matCellDef="let element">{{ element.englishWord }}</td>
       </ng-container>
-      
+
       <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef> Correct Category </th>
-        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+        <th mat-header-cell *matHeaderCellDef>Correct Category</th>
+        <td mat-cell *matCellDef="let element">{{ element.category }}</td>
       </ng-container>
 
       <ng-container matColumnDef="isCorrect">
-        <th mat-header-cell *matHeaderCellDef> Correct? </th>
-        <td mat-cell *matCellDef="let element"> {{element.isCorrect ? '✔️' : '❌'}} </td>
+        <th mat-header-cell *matHeaderCellDef>Correct?</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.isCorrect ? "✔️" : "❌" }}
+        </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="['englishWord', 'category', 'isCorrect']"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['englishWord', 'category', 'isCorrect'];"></tr>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="['englishWord', 'category', 'isCorrect']"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['englishWord', 'category', 'isCorrect']"
+      ></tr>
     </table>
 
     <button mat-raised-button color="primary" (click)="exit()">Exit</button>

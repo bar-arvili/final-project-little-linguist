@@ -8,9 +8,14 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-exit-dialog',
   standalone: true,
-  imports: [MatDialogModule, RouterModule,  MatSelectModule,MatButtonModule, MatIconModule],
+  imports: [
+    MatDialogModule,
+    RouterModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './exit-dialog.component.html',
-  styleUrl: './exit-dialog.component.css'
+  styleUrl: './exit-dialog.component.css',
 })
-export class ExitDialogComponent {
-}
+export class ExitDialogComponent {}

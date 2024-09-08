@@ -6,24 +6,24 @@ import { GameSelectionComponent } from './Game selection/Game selection.componen
 import { HelpComponent } from './help/help.component';
 import { MixedLettersComponent } from './mixed letters/mixed letters.component';
 import { WordSorterComponent } from './word sorter/word sorter.component';
-import { CategorySelectionComponent } from './Category selection/Category selection.component';
+import { CategorySelectionComponent } from './Category-selection/Category-selection.component';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 import { FailureDialogComponent } from './failure-dialog/failure-dialog.component';
 import { ExitButtonComponent } from './exit-button/exit-button.component';
 import { SummaryDialogComponent } from './summary-dialog/summary-dialog.component';
 
 export const routes: Routes = [
-    {path: "Admin", component: CategoriesListComponent},
-    {path: "category/:id", component: CategoryFormComponent},
-    {path: "newcategory", component: CategoryFormComponent},
-    {path: "", component: DashboardComponent},
-    {path: "Game-selection", component: GameSelectionComponent},
-    {path: "help", component: HelpComponent},
-    {path: 'mixed-letters/:id', component: MixedLettersComponent},
-    {path: 'word-sorter/:id', component: WordSorterComponent},
-    {path: "Category-selection", component: CategorySelectionComponent},
-    {path: "success-dialog", component: SuccessDialogComponent},
-    {path: "failure-dialog", component: FailureDialogComponent},
-    {path: "exit-button", component: ExitButtonComponent},
-    {path: "summary-dialog", component: SummaryDialogComponent}
+  { path: 'Admin', component: CategoriesListComponent },
+  { path: 'category/:id', component: CategoryFormComponent },
+  { path: 'newcategory', component: CategoryFormComponent },
+  { path: '', component: DashboardComponent },
+  { path: 'Game-selection', component: GameSelectionComponent },
+  { path: 'help', component: HelpComponent },
+  { path: 'mixed-letters/:id', component: MixedLettersComponent },
+  { path: 'word-sorter/:id', component: WordSorterComponent },
+  { path: 'Category-selection', component: CategorySelectionComponent },
+  { path: 'success-dialog', component: SuccessDialogComponent },
+  { path: 'failure-dialog', component: FailureDialogComponent },
+  { path: 'exit-button', component: ExitButtonComponent },
+  { path: 'summary-dialog', component: SummaryDialogComponent },
 ];
