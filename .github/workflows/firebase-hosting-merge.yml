@@ -20,4 +20,3 @@ jobs:
           projectId: little-linguist-5cbbc
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks
-
