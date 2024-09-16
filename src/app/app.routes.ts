@@ -26,4 +26,5 @@ export const routes: Routes = [
   { path: 'failure-dialog', component: FailureDialogComponent },
   { path: 'exit-button', component: ExitButtonComponent },
   { path: 'summary-dialog', component: SummaryDialogComponent },
+
 ];
