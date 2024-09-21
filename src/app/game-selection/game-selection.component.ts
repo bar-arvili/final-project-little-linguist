@@ -1,4 +1,3 @@
-import { CategorySelectionComponent } from '../category-selection/category-selection.component';
 import { GamesService } from '../services/games.service';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
@@ -6,6 +5,7 @@ import { GameProfile } from '../../shared/model/gameProfile';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
+import { CategorySelectionComponent } from '../category-selection/category-selection.component';
 
 @Component({
   selector: 'app-game-selection',

@@ -6,11 +6,11 @@ import { GameSelectionComponent } from './game-selection/game-selection.componen
 import { HelpComponent } from './help/help.component';
 import { MixedLettersComponent } from './mixed-letters/mixed-letters.component';
 import { WordSorterComponent } from './word-sorter/word-sorter.component';
-import { CategorySelectionComponent } from './category-selection/category-selection.component';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 import { FailureDialogComponent } from './failure-dialog/failure-dialog.component';
 import { ExitButtonComponent } from './exit-button/exit-button.component';
 import { SummaryDialogComponent } from './summary-dialog/summary-dialog.component';
+import { CategorySelectionComponent } from './category-selection/category-selection.component';
 
 export const routes: Routes = [
   { path: 'Admin', component: CategoriesListComponent },
@@ -21,9 +21,9 @@ export const routes: Routes = [
   { path: 'help', component: HelpComponent },
   { path: 'mixed-letters/:id', component: MixedLettersComponent },
   { path: 'word-sorter/:id', component: WordSorterComponent },
-  { path: 'category-selection', component: CategorySelectionComponent },
   { path: 'success-dialog', component: SuccessDialogComponent },
   { path: 'failure-dialog', component: FailureDialogComponent },
   { path: 'exit-button', component: ExitButtonComponent },
   { path: 'summary-dialog', component: SummaryDialogComponent },
+  { path: 'category-selection', component: CategorySelectionComponent },
 ];
