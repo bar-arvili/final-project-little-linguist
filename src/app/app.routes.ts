@@ -10,7 +10,7 @@ import { SuccessDialogComponent } from './success-dialog/success-dialog.componen
 import { FailureDialogComponent } from './failure-dialog/failure-dialog.component';
 import { ExitButtonComponent } from './exit-button/exit-button.component';
 import { SummaryDialogComponent } from './summary-dialog/summary-dialog.component';
-import { CategorySelectionComponent } from './category-selection-temp/category-selection-temp.component';
+import { CategorySelectionComponent } from './category-selection/category-selection.component';
 
 export const routes: Routes = [
   { path: 'Admin', component: CategoriesListComponent },

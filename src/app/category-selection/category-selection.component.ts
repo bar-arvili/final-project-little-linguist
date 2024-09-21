@@ -29,8 +29,8 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     RouterModule,
   ],
-  templateUrl: './category-selection-temp.component.html',
-  styleUrl: './category-selection-temp.component.css',
+  templateUrl: './category-selection.component.html',
+  styleUrl: './category-selection.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategorySelectionComponent implements OnInit {

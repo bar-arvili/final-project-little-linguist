@@ -5,7 +5,7 @@ import { GameProfile } from '../../shared/model/gameProfile';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-import { CategorySelectionComponent } from '../category-selection-temp/category-selection-temp.component';
+import { CategorySelectionComponent } from '../category-selection/category-selection.component';
 
 @Component({
   selector: 'app-game-selection',
