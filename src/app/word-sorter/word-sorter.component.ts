@@ -2,6 +2,7 @@ import { CategoriesService } from '../services/categories.service';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnInit,
@@ -17,6 +18,7 @@ import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ViewPointsComponent } from '../view-points/view-points.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-word-sorter',
@@ -29,6 +31,7 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatTableModule,
     ViewPointsComponent,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './word-sorter.component.html',
   styleUrl: './word-sorter.component.css',
@@ -50,18 +53,32 @@ export class WordSorterComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   summaryData: any[] = [];
   isGameFinished: boolean = false;
+  isFullyLoaded = false;
 
   constructor(
     private categoriesService: CategoriesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.categories = this.categoriesService.list();
-    this.currentCategory = this.categoriesService.get(parseInt(this.id));
-    this.randomCategory = this.getRandomCategory();
-    this.initializeWordsAndPoints();
-    this.presentNextSortingWord();
+    Promise.all([
+      this.categoriesService
+        .get(this.id)
+        .then((result: Category | undefined) => {
+          this.currentCategory = result;
+        }),
+      this.categoriesService.list().then((result: Category[] | undefined) => {
+        this.categories = result || [];
+      }),
+    ]).then(() => {
+      this.randomCategory = this.getRandomCategory();
+      this.initializeWordsAndPoints();
+      this.presentNextSortingWord();
+
+      this.cdr.markForCheck();
+      this.isFullyLoaded = true;
+    });
   }
 
   private getRandomCategory(): Category | undefined {

@@ -2,6 +2,7 @@ import { CategoriesService } from '../services/categories.service';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnInit,
@@ -53,17 +54,24 @@ export class MixedLettersComponent implements OnInit {
   points = 0;
   wordPoints: number = 0;
   totalWords: number = 0;
+  isFullyLoaded = false;
 
   constructor(
     private categoriesService: CategoriesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.currentCategory = this.categoriesService.get(parseInt(this.id));
-    if (this.currentCategory?.words) {
-      this.setupGame();
-    }
+    this.categoriesService.get(this.id).then((result: Category | undefined) => {
+      this.currentCategory = result;
+
+      if (this.currentCategory?.words) {
+        this.setupGame();
+        this.isFullyLoaded = true;
+        this.cdr.markForCheck();
+      }
+    });
   }
 
   setupGame(): void {

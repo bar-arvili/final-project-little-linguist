@@ -1,76 +1,71 @@
 import { Injectable } from '@angular/core';
 import { Category } from '../../shared/model/category';
+import {
+  Firestore,
+  collection,
+  doc,
+  deleteDoc,
+  getDoc,
+  getDocs,
+  QuerySnapshot,
+  DocumentSnapshot,
+  setDoc,
+  addDoc,
+} from '@angular/fire/firestore';
+import { categoryConverter } from './converters/category-converter';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoriesService {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [x: string]: any;
-  private readonly CATEGORIES_KEY = 'categories';
-  private readonly NEXT_ID_KEY = 'nextId';
+  constructor(private firestore: Firestore) {}
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private getCategories(): Map<number, Category> {
-    // eslint-disable-next-line prefer-const
-    let categoriesString = localStorage.getItem(this.CATEGORIES_KEY);
-
-    if (!categoriesString) {
-      return new Map<number, Category>();
-    } else {
-      return new Map<number, Category>(JSON.parse(categoriesString));
-    }
+  async list(): Promise<Category[]> {
+    const categoryCollection = collection(
+      this.firestore,
+      'categories'
+    ).withConverter(categoryConverter);
+    const querySnapshot: QuerySnapshot<Category> = await getDocs(
+      categoryCollection
+    );
+    const result: Category[] = [];
+    querySnapshot.docs.forEach((docSnap: DocumentSnapshot<Category>) => {
+      const data = docSnap.data();
+      if (data) {
+        result.push(data);
+      }
+    });
+    return result;
   }
 
-  private getNextId(): number {
-    // eslint-disable-next-line prefer-const
-    let nextIdString = localStorage.getItem(this.NEXT_ID_KEY);
-
-    return nextIdString ? parseInt(nextIdString) : 0;
+  async get(id: string): Promise<Category | undefined> {
+    const docRef = doc(this.firestore, 'categories', id).withConverter(
+      categoryConverter
+    );
+    const chr = await getDoc(docRef);
+    if (chr.exists()) return chr.data();
+    return undefined;
   }
 
-  private setCategories(list: Map<number, Category>): void {
-    localStorage.setItem(this.CATEGORIES_KEY, JSON.stringify(Array.from(list)));
+  async delete(id: string): Promise<void> {
+    const docRef = doc(this.firestore, 'categories', id).withConverter(
+      categoryConverter
+    );
+    await deleteDoc(docRef);
   }
 
-  private setNextId(id: number): void {
-    localStorage.setItem(this.NEXT_ID_KEY, id.toString());
-  }
-
-  list(): Category[] {
-    return Array.from(this.getCategories().values());
-  }
-
-  get(id: number): Category | undefined {
-    return this.getCategories().get(id);
-  }
-
-  delete(id: number): void {
-    // eslint-disable-next-line prefer-const
-    let categoriesMap = this.getCategories();
-    categoriesMap.delete(id);
-    this.setCategories(categoriesMap);
-  }
-
-  update(category: Category): void {
-    // eslint-disable-next-line prefer-const
-    let categoriesMap = this.getCategories();
-
+  async update(category: Category): Promise<void> {
+    const docRef = doc(this.firestore, 'categories', category.id).withConverter(
+      categoryConverter
+    );
     category.lastUpdateDate = new Date();
-    categoriesMap.set(category.id, category);
-
-    this.setCategories(categoriesMap);
+    await setDoc(docRef, category);
   }
 
-  add(category: Category): void {
-    category.id = this.getNextId();
-    category.lastUpdateDate = new Date();
-
-    // eslint-disable-next-line prefer-const
-    let categoriesMap = this.getCategories();
-    categoriesMap.set(category.id, category);
-
-    this.setCategories(categoriesMap);
-    this.setNextId(++category.id);
+  async add(category: Category): Promise<void> {
+    await addDoc(
+      collection(this.firestore, 'categories').withConverter(categoryConverter),
+      category
+    );
   }
 }

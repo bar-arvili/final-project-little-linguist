@@ -49,10 +49,12 @@ export class CategorySelectionComponent implements OnInit {
   }
 
   loadCategories(): void {
-    this.categories = this.categoriesService.list();
+    this.categoriesService.list().then((result: Category[]) => {
+      this.categories = result;
+    });
   }
 
-  onCategorySelected(categoryId: number): void {
+  onCategorySelected(categoryId: string): void {
     this.selectedCategory = this.categories.find(
       (category) => category.id === categoryId
     );
