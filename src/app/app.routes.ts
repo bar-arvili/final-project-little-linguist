@@ -21,7 +21,7 @@ export const routes: Routes = [
   { path: 'help', component: HelpComponent },
   { path: 'mixed-letters/:id', component: MixedLettersComponent },
   { path: 'word-sorter/:id', component: WordSorterComponent },
-  { path: 'Category-selection', component: CategorySelectionComponent },
+  { path: 'category-selection', component: CategorySelectionComponent },
   { path: 'success-dialog', component: SuccessDialogComponent },
   { path: 'failure-dialog', component: FailureDialogComponent },
   { path: 'exit-button', component: ExitButtonComponent },
