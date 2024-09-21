@@ -1,5 +1,5 @@
-import { CategorySelectionComponent } from './../Category-selection/Category-selection.component';
-import { GamesService } from './../services/games.service';
+import { CategorySelectionComponent } from '../category-selection/category-selection.component';
+import { GamesService } from '../services/games.service';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { GameProfile } from '../../shared/model/gameProfile';
@@ -11,8 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
   selector: 'app-game-selection',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatButtonModule],
-  templateUrl: './Game selection.component.html',
-  styleUrl: './Game selection.component.css',
+  templateUrl: './game-selection.component.html',
+  styleUrl: './game-selection.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameSelectionComponent implements OnInit {

@@ -5,19 +5,19 @@ mat-toolbar {
 }
 
 button[mat-icon-button] {
-  margin-right: 8px; 
+  margin-right: 8px;
 }
 
 .example-spacer {
-  flex: 1; 
+  flex: 1;
 }
 
 mat-icon {
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .LittleLinguist {
   font-weight: bold;
   font-size: 1.2em;
-  cursor: pointer; 
+  cursor: pointer;
 }

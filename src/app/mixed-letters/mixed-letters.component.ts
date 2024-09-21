@@ -1,4 +1,4 @@
-import { CategoriesService } from './../services/categories.service';
+import { CategoriesService } from '../services/categories.service';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -35,8 +35,8 @@ import { SummaryDialogComponent } from '../summary-dialog/summary-dialog.compone
     ExitButtonComponent,
     ViewPointsComponent,
   ],
-  templateUrl: './mixed letters.component.html',
-  styleUrl: './mixed letters.component.css',
+  templateUrl: './mixed-letters.component.html',
+  styleUrl: './mixed-letters.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MixedLettersComponent implements OnInit {

@@ -2,11 +2,11 @@ import { Routes } from '@angular/router';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { GameSelectionComponent } from './Game selection/Game selection.component';
+import { GameSelectionComponent } from './game-selection/game-selection.component';
 import { HelpComponent } from './help/help.component';
-import { MixedLettersComponent } from './mixed letters/mixed letters.component';
-import { WordSorterComponent } from './word sorter/word sorter.component';
-import { CategorySelectionComponent } from './Category-selection/Category-selection.component';
+import { MixedLettersComponent } from './mixed-letters/mixed-letters.component';
+import { WordSorterComponent } from './word-sorter/word-sorter.component';
+import { CategorySelectionComponent } from './category-selection/category-selection.component';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 import { FailureDialogComponent } from './failure-dialog/failure-dialog.component';
 import { ExitButtonComponent } from './exit-button/exit-button.component';
@@ -17,7 +17,7 @@ export const routes: Routes = [
   { path: 'category/:id', component: CategoryFormComponent },
   { path: 'newcategory', component: CategoryFormComponent },
   { path: '', component: DashboardComponent },
-  { path: 'Game-selection', component: GameSelectionComponent },
+  { path: 'game-selection', component: GameSelectionComponent },
   { path: 'help', component: HelpComponent },
   { path: 'mixed-letters/:id', component: MixedLettersComponent },
   { path: 'word-sorter/:id', component: WordSorterComponent },
@@ -26,5 +26,4 @@ export const routes: Routes = [
   { path: 'failure-dialog', component: FailureDialogComponent },
   { path: 'exit-button', component: ExitButtonComponent },
   { path: 'summary-dialog', component: SummaryDialogComponent },
-
 ];
