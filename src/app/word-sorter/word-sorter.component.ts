@@ -19,6 +19,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { ViewPointsComponent } from '../view-points/view-points.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { GameResultService } from '../services/game-result.service';
+import { GameResult } from '../../shared/model/game-result';
 
 @Component({
   selector: 'app-word-sorter',
@@ -58,27 +60,21 @@ export class WordSorterComponent implements OnInit {
   constructor(
     private categoriesService: CategoriesService,
     private dialog: MatDialog,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private gameResultService: GameResultService
   ) {}
 
-  ngOnInit(): void {
-    Promise.all([
-      this.categoriesService
-        .get(this.id)
-        .then((result: Category | undefined) => {
-          this.currentCategory = result;
-        }),
-      this.categoriesService.list().then((result: Category[] | undefined) => {
-        this.categories = result || [];
-      }),
-    ]).then(() => {
-      this.randomCategory = this.getRandomCategory();
-      this.initializeWordsAndPoints();
-      this.presentNextSortingWord();
+  async ngOnInit(): Promise<void> {
+    this.currentCategory = await this.categoriesService.get(this.id);
 
-      this.cdr.markForCheck();
-      this.isFullyLoaded = true;
-    });
+    this.categories = (await this.categoriesService.list()) || [];
+
+    this.randomCategory = this.getRandomCategory();
+    this.initializeWordsAndPoints();
+    this.presentNextSortingWord();
+
+    this.cdr.markForCheck();
+    this.isFullyLoaded = true;
   }
 
   private getRandomCategory(): Category | undefined {
@@ -162,6 +158,17 @@ export class WordSorterComponent implements OnInit {
     const allCorrect = this.summaryData.every((item) => item.isCorrect);
     if (allCorrect) {
       this.sortingPoints = 100;
+    }
+
+    if (this.currentCategory) {
+      const gameResult = new GameResult(
+        this.currentCategory.id,
+        'word-sorter',
+        new Date(),
+        this.sortingPoints
+      );
+
+      this.gameResultService.addGameResult(gameResult);
     }
   }
 

@@ -5,7 +5,8 @@ export class Category {
     lastUpdateDate = new Date();
     words : TranslatedWord[] = [];
 
-    constructor(public id : string,
+    constructor
+    (public id : string,
         public name : string,
         public origin : Language,
         public target : Language) {

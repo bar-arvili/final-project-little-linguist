@@ -21,6 +21,8 @@ import { TranslatedWord } from '../../shared/model/translated-word';
 import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
 import { ViewPointsComponent } from '../view-points/view-points.component';
 import { SummaryDialogComponent } from '../summary-dialog/summary-dialog.component';
+import { GameResultService } from '../services/game-result.service';
+import { GameResult } from '../../shared/model/game-result';
 
 @Component({
   selector: 'app-mixed-letters',
@@ -59,19 +61,18 @@ export class MixedLettersComponent implements OnInit {
   constructor(
     private categoriesService: CategoriesService,
     private dialog: MatDialog,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private gameResultService: GameResultService
   ) {}
 
-  ngOnInit(): void {
-    this.categoriesService.get(this.id).then((result: Category | undefined) => {
-      this.currentCategory = result;
+  async ngOnInit(): Promise<void> {
+    this.currentCategory = await this.categoriesService.get(this.id);
 
-      if (this.currentCategory?.words) {
-        this.setupGame();
-        this.isFullyLoaded = true;
-        this.cdr.markForCheck();
-      }
-    });
+    if (this.currentCategory?.words) {
+      this.setupGame();
+      this.isFullyLoaded = true;
+      this.cdr.markForCheck();
+    }
   }
 
   setupGame(): void {
@@ -162,6 +163,15 @@ export class MixedLettersComponent implements OnInit {
         summaryData: summaryData,
       },
     });
+
+    const gameResult = new GameResult(
+      this.currentCategory?.id || 'unknown-category',
+      'mixed-letters',
+      new Date(),
+      this.points
+    );
+
+    this.gameResultService.addGameResult(gameResult);
   }
 
   reset(): void {
