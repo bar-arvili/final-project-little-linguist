@@ -3,5 +3,84 @@
   <p>Welcome to your Dashboard</p>
 </div>
 
-<div>hellvfp</div>
-<div>hellvfp</div>
+<div>
+  <mat-tab-group>
+    <mat-tab label="Summary">
+      <div class="dashboard">
+        <mat-card>
+          <mat-card-title>Total Points</mat-card-title>
+          <mat-card-content>{{ totalPoints }}</mat-card-content>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title>Games Played</mat-card-title>
+          <mat-card-content>{{ gamesPlayed }}</mat-card-content>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title>Highest Avg Score Game</mat-card-title>
+          <mat-card-content>{{ highestAverageScoreGame }}</mat-card-content>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title>Lowest Avg Score Game</mat-card-title>
+          <mat-card-content>{{ lowestAverageScoreGame }}</mat-card-content>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title>Categories Studied</mat-card-title>
+          <mat-card-content>{{ categoriesStudied }}</mat-card-content>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title>Categories Not Studied</mat-card-title>
+          <mat-card-content>{{ categoriesNotStudied }}</mat-card-content>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title>% Games with 100 Points</mat-card-title>
+          <mat-card-content
+            >{{
+              percentageOfGamesWith100Score | number : "1.0-2"
+            }}%</mat-card-content
+          >
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title>% Categories Studied</mat-card-title>
+          <mat-card-content
+            >{{
+              percentageOfCategoriesStudied | number : "1.0-2"
+            }}%</mat-card-content
+          >
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title>Most Played Category</mat-card-title>
+          <mat-card-content>{{ mostPlayedCategory }}</mat-card-content>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title>Monthly Games Played</mat-card-title>
+          <mat-card-content>{{ monthlyGamesPlayed }}</mat-card-content>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title>Games to Complete Monthly Challenge</mat-card-title>
+          <mat-card-content *ngIf="gamesToCompleteChallenge > 0">
+            {{ gamesToCompleteChallenge }} more games to reach 20 games this
+            month.
+          </mat-card-content>
+          <mat-card-content *ngIf="gamesToCompleteChallenge === 0">
+            Congratulations! You've completed the monthly challenge!
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title>Consecutive Days Played (Days Strike)</mat-card-title>
+          <mat-card-content>{{ daysStrike }}</mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
