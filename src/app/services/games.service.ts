@@ -18,6 +18,13 @@ export class GamesService {
       'A game where you sort words according to certain categories.',
       'word-sorter'
     ),
+
+    new GameProfile(
+      3,
+      'Time Attack Translation',
+      'A game where players translate words from Hebrew to English against time.',
+      'time-attack-translation'
+    ),
   ];
 
   constructor() {}

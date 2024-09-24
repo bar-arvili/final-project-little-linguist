@@ -1,0 +1,69 @@
+<div class="header-container">
+  <div class="title-container">
+    <div class="title">Time Attack Translation</div>
+    <div class="category-name">Category name {{ currentCategory?.name }}</div>
+  </div>
+
+  <button mat-icon-button class="exit-button" (click)="exit()">
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
+</div>
+
+<p>Time Remaining: {{ timeRemaining }} seconds</p>
+
+<div class="points-container">
+  <app-view-points [points]="points"></app-view-points>
+</div>
+
+<div *ngIf="!gameEnded" class="game-content">
+  <div class="word-container">
+    <div class="hebrew-word-container">
+      <p class="label">Meaning in Hebrew:</p>
+      <span class="hebrew-word">{{ words[currentWordIndex]?.target }}</span>
+    </div>
+
+    <div class="input-container">
+      <mat-form-field appearance="outline" class="guess-field">
+        <mat-label>Your answer:</mat-label>
+        <input
+          matInput
+          [(ngModel)]="userInput"
+          placeholder="Enter correct English word"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="button-container">
+      <button
+        mat-raised-button
+        color="primary"
+        class="submit-button"
+        (click)="submit(userInput)"
+        [disabled]="!userInput.trim()"
+      >
+        Submit
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="reset-button"
+        (click)="reset()"
+      >
+        Reset
+      </button>
+    </div>
+
+    <div class="progress-container">
+      <mat-progress-bar
+        mode="determinate"
+        [value]="(currentWordIndex / totalWords) * 100"
+      ></mat-progress-bar>
+      <p class="progress-text">{{ currentWordIndex + 1 }}/{{ totalWords }}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="gameEnded" class="game-over">
+  <p>Game Over!</p>
+</div>

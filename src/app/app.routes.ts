@@ -11,6 +11,7 @@ import { FailureDialogComponent } from './failure-dialog/failure-dialog.componen
 import { ExitButtonComponent } from './exit-button/exit-button.component';
 import { SummaryDialogComponent } from './summary-dialog/summary-dialog.component';
 import { CategorySelectionComponent } from './category-selection/category-selection.component';
+import { TimeAttackTranslationComponent } from './time-attack-translation/time-attack-translation.component';
 
 export const routes: Routes = [
   { path: 'Admin', component: CategoriesListComponent },
@@ -26,4 +27,6 @@ export const routes: Routes = [
   { path: 'exit-button', component: ExitButtonComponent },
   { path: 'summary-dialog', component: SummaryDialogComponent },
   { path: 'category-selection', component: CategorySelectionComponent },
+  { path: 'time-attack-translation/:id', component: TimeAttackTranslationComponent }
+  ,
 ];
