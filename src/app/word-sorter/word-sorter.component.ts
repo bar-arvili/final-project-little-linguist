@@ -163,7 +163,7 @@ export class WordSorterComponent implements OnInit {
     if (this.currentCategory) {
       const gameResult = new GameResult(
         this.currentCategory.id,
-        'word-sorter',
+        'Word Sorter',
         new Date(),
         this.sortingPoints
       );

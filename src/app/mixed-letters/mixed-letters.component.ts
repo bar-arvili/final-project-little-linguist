@@ -166,7 +166,7 @@ export class MixedLettersComponent implements OnInit {
 
     const gameResult = new GameResult(
       this.currentCategory?.id || 'unknown-category',
-      'mixed-letters',
+      'Mixed Letters',
       new Date(),
       this.points
     );

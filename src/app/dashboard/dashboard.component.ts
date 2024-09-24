@@ -51,26 +51,30 @@ export class DashboardComponent implements OnInit {
 
     let highestAvg = -Infinity,
       lowestAvg = Infinity,
-      highestGame = '',
-      lowestGame = '';
+      highestGameName = '',
+      lowestGameName = '';
 
     for (const [gameId, scores] of Object.entries(gameScoresMap)) {
       const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
       if (avg > highestAvg) {
         highestAvg = avg;
-        highestGame = gameId;
+        highestGameName = gameId;
       }
       if (avg < lowestAvg) {
         lowestAvg = avg;
-        lowestGame = gameId;
+        lowestGameName = gameId;
       }
     }
 
-    this.highestAverageScoreGame = highestGame;
-    this.lowestAverageScoreGame = lowestGame;
+    this.highestAverageScoreGame = highestGameName;
+    this.lowestAverageScoreGame = lowestGameName;
 
     const uniqueCategories = new Set(
-      gameResults.map((game) => game.categoryId)
+      gameResults
+        .map((game) => game.categoryId)
+        .filter((categoryId) =>
+          categories.some((category) => category.id === categoryId)
+        )
     );
     this.categoriesStudied = uniqueCategories.size;
     this.categoriesNotStudied = categories.length - this.categoriesStudied;
@@ -84,9 +88,7 @@ export class DashboardComponent implements OnInit {
       (gamesWith100Points / gameResults.length) * 100;
 
     this.calculateMostPlayedCategory(gameResults, categories);
-
     this.calculateMonthlyGames(gameResults);
-
     this.calculateDaysStrike(gameResults);
   }
 
@@ -119,6 +121,7 @@ export class DashboardComponent implements OnInit {
   calculateMonthlyGames(gameResults: GameResult[]) {
     const firstDayOfMonth = new Date();
     firstDayOfMonth.setDate(1);
+    firstDayOfMonth.setHours(0, 0, 0, 0);
 
     const monthlyGames = gameResults.filter(
       (game) => new Date(game.date) >= firstDayOfMonth
@@ -135,8 +138,12 @@ export class DashboardComponent implements OnInit {
     let strikeCount = 0;
     let hasGamesOnCurrentDate = true;
 
+    const sortedGameResults = gameResults.sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+
     while (hasGamesOnCurrentDate) {
-      const gamesOnDate = gameResults.filter(
+      const gamesOnDate = sortedGameResults.filter(
         (game) =>
           new Date(game.date).toDateString() === currentDate.toDateString()
       );

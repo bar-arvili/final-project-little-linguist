@@ -155,7 +155,7 @@ export class TimeAttackTranslationComponent implements OnInit {
 
     const gameResult = new GameResult(
       this.currentCategory?.id || 'unknown-category',
-      'time-attack-translation',
+      'Time Attack Translation',
       new Date(),
       this.points
     );
