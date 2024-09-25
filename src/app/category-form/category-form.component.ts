@@ -54,23 +54,24 @@ export class CategoryFormComponent implements OnInit {
   }
 
   addWord() {
-    this.currentCategory.words = 
-      [...this.currentCategory.words, 
-        new TranslatedWord("", "")];
- }
+    this.currentCategory.words = [
+      ...this.currentCategory.words,
+      new TranslatedWord('', ''),
+    ];
+  }
 
-  deleteWord(index : number) {
+  deleteWord(index: number) {
     const extendedWordsList = Array.from(this.currentCategory.words);
-    extendedWordsList.splice(index, 1)
+    extendedWordsList.splice(index, 1);
     this.currentCategory.words = extendedWordsList;
     this.wordsGroup!.control.markAsDirty();
   }
 
-  saveCategory() {
+  async saveCategory() {
     if (this.id) {
-      this.categoriesService.update(this.currentCategory);
+      await this.categoriesService.update(this.currentCategory);
     } else {
-      this.categoriesService.add(this.currentCategory);
+      await this.categoriesService.add(this.currentCategory);
     }
 
     this.router.navigate(['']);
