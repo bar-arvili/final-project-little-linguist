@@ -9,7 +9,6 @@ import { WordSorterComponent } from './word-sorter/word-sorter.component';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 import { FailureDialogComponent } from './failure-dialog/failure-dialog.component';
 import { ExitButtonComponent } from './exit-button/exit-button.component';
-import { SummaryDialogComponent } from './summary-dialog/summary-dialog.component';
 import { CategorySelectionComponent } from './category-selection/category-selection.component';
 import { TimeAttackTranslationComponent } from './time-attack-translation/time-attack-translation.component';
 
@@ -25,8 +24,9 @@ export const routes: Routes = [
   { path: 'success-dialog', component: SuccessDialogComponent },
   { path: 'failure-dialog', component: FailureDialogComponent },
   { path: 'exit-button', component: ExitButtonComponent },
-  { path: 'summary-dialog', component: SummaryDialogComponent },
   { path: 'category-selection', component: CategorySelectionComponent },
-  { path: 'time-attack-translation/:id', component: TimeAttackTranslationComponent }
-  ,
+  {
+    path: 'time-attack-translation/:id',
+    component: TimeAttackTranslationComponent,
+  },
 ];

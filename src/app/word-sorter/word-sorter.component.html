@@ -1,4 +1,4 @@
-<div *ngIf="!isGameFinished; else summaryTemplate">
+<div *ngIf="isGameOn; else summaryTemplate">
   <div class="container">
     <div>word sorter</div>
     <div>category name {{ currentCategory?.name }}</div>
@@ -49,10 +49,16 @@
     </div>
   </div>
 </div>
+
 <ng-template #summaryTemplate>
   <div class="container">
     <h2>Game Summary</h2>
     <p>Total Points: {{ sortingPoints }}</p>
+    <p>
+      You were correct in {{ numCorrectAnswers }} out of
+      {{ totalSortingWords }} words
+    </p>
+
     <table mat-table [dataSource]="summaryData" class="mat-elevation-z8">
       <ng-container matColumnDef="englishWord">
         <th mat-header-cell *matHeaderCellDef>English Word</th>
@@ -81,6 +87,9 @@
       ></tr>
     </table>
 
-    <button mat-raised-button color="primary" (click)="exit()">Exit</button>
+    <a mat-raised-button color="primary" [routerLink]="['/game-selection']">
+      New Game
+    </a>
+    <button mat-raised-button color="warn" (click)="exit()">Exit</button>
   </div>
 </ng-template>

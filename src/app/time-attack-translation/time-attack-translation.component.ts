@@ -15,8 +15,10 @@ import { GameResultService } from '../services/game-result.service';
 import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
 import { FailureDialogComponent } from '../failure-dialog/failure-dialog.component';
 import { GameResult } from '../../shared/model/game-result';
-import { SummaryDialogComponent } from '../summary-dialog/summary-dialog.component';
 import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
+import { RouterModule } from '@angular/router';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-time-attack-translation',
@@ -32,6 +34,9 @@ import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
     ExitButtonComponent,
     ViewPointsComponent,
     FormsModule,
+    RouterModule,
+    MatTableModule,
+    MatButtonModule,
   ],
   templateUrl: './time-attack-translation.component.html',
   styleUrl: './time-attack-translation.component.css',
@@ -52,11 +57,16 @@ export class TimeAttackTranslationComponent implements OnInit {
   timeRemaining = 60;
   intervalId?: number;
   isFullyLoaded = false;
+  summaryData: {
+    hebrewWord: string;
+    correctEnglishWord: string;
+    isCorrect: boolean;
+  }[] = [];
 
   constructor(
     private categoriesService: CategoriesService,
-    private dialog: MatDialog,
-    private gameResultService: GameResultService
+    private gameResultService: GameResultService,
+    private dialog: MatDialog
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -70,19 +80,18 @@ export class TimeAttackTranslationComponent implements OnInit {
 
   setupGame(): void {
     this.words = this.shuffleArray(this.currentCategory?.words || []);
-
     this.totalWords = this.words.length;
     this.wordPoints = Math.floor(100 / this.totalWords);
     this.points = 0;
-
     this.wordOrder = Array.from({ length: this.totalWords }, (_, i) => i);
     this.presentWord();
+    this.gameEnded = false;
+    this.timeRemaining = 60;
   }
 
   presentWord(): void {
     const currentIndex = this.wordOrder[this.currentWordIndex];
     const currentWord = this.words?.[currentIndex];
-
     if (currentWord) {
       console.log('Presenting word:', currentWord);
     }
@@ -112,46 +121,37 @@ export class TimeAttackTranslationComponent implements OnInit {
       this.points += this.wordPoints;
     }
 
-    if (!isLastWord) {
-      this.currentWordIndex++;
-      this.presentWord();
-      this.dialog
-        .open(isCorrect ? SuccessDialogComponent : FailureDialogComponent, {
-          data: isCorrect,
-        })
-        .afterClosed();
-    } else {
-      this.gameEnded = true;
-      this.showSummary();
-    }
+    const dialogRef = this.dialog.open(
+      isCorrect ? SuccessDialogComponent : FailureDialogComponent,
+      {
+        data: isCorrect,
+      }
+    );
+
+    dialogRef.afterClosed().subscribe(() => {
+      if (!isLastWord) {
+        this.currentWordIndex++;
+        this.presentWord();
+      } else {
+        this.endGame();
+      }
+    });
 
     this.userInput = '';
   }
 
   endGame(): void {
+    clearInterval(this.intervalId);
     this.gameEnded = true;
     this.showSummary();
   }
 
-  shuffleArray(array: TranslatedWord[]): TranslatedWord[] {
-    return array.sort(() => Math.random() - 0.5);
-  }
-
   showSummary(): void {
-    const summaryData = this.words.map((word) => ({
+    this.summaryData = this.words.map((word) => ({
       hebrewWord: word.target,
       correctEnglishWord: word.origin,
       isCorrect: word.guess?.toLowerCase() === word.origin.toLowerCase(),
     }));
-
-    this.dialog.open(SummaryDialogComponent, {
-      data: {
-        points: this.points,
-        totalWords: this.totalWords,
-        successCount: `${this.successCount} / ${this.totalWords}`,
-        summaryData: summaryData,
-      },
-    });
 
     const gameResult = new GameResult(
       this.currentCategory?.id || 'unknown-category',
@@ -175,9 +175,12 @@ export class TimeAttackTranslationComponent implements OnInit {
       this.timeRemaining--;
       if (this.timeRemaining <= 0) {
         this.endGame();
-        clearInterval(this.intervalId);
       }
     }, 1000);
+  }
+
+  shuffleArray(array: TranslatedWord[]): TranslatedWord[] {
+    return array.sort(() => Math.random() - 0.5);
   }
 
   get progressValue(): number {

@@ -15,11 +15,11 @@
   <app-view-points [points]="points"></app-view-points>
 </div>
 
-<div *ngIf="!gameEnded" class="game-content">
+<div *ngIf="!gameEnded; else summaryContent" class="game-content">
   <div class="word-container">
     <div class="hebrew-word-container">
       <p class="label">Meaning in Hebrew:</p>
-      <span class="hebrew-word">{{ words[currentWordIndex]?.target }}</span>
+      <span class="hebrew-word">{{ words[currentWordIndex].target }}</span>
     </div>
 
     <div class="input-container">
@@ -29,7 +29,13 @@
           matInput
           [(ngModel)]="userInput"
           placeholder="Enter correct English word"
+          pattern="[a-zA-Z]*"
+          required
+          #originField="ngModel"
         />
+        <mat-error *ngIf="originField.invalid && userInput.trim()">
+          English letters only
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -39,7 +45,7 @@
         color="primary"
         class="submit-button"
         (click)="submit(userInput)"
-        [disabled]="!userInput.trim()"
+        [disabled]="originField.invalid || !userInput.trim()"
       >
         Submit
       </button>
@@ -57,13 +63,57 @@
     <div class="progress-container">
       <mat-progress-bar
         mode="determinate"
-        [value]="(currentWordIndex / totalWords) * 100"
+        [value]="progressValue"
       ></mat-progress-bar>
       <p class="progress-text">{{ currentWordIndex + 1 }}/{{ totalWords }}</p>
     </div>
   </div>
 </div>
 
-<div *ngIf="gameEnded" class="game-over">
-  <p>Game Over!</p>
-</div>
+<ng-template #summaryContent>
+  <div class="summary-content">
+    <h2>Game Summary</h2>
+    <p>Total Points: {{ points }}</p>
+    <p>You were correct in {{ successCount }} out of {{ totalWords }} words</p>
+    <p>Time Remaining: {{ timeRemaining }} seconds</p>
+
+    <table mat-table [dataSource]="summaryData" class="mat-elevation-z8">
+      <ng-container matColumnDef="hebrewWord">
+        <th mat-header-cell *matHeaderCellDef>Hebrew Word</th>
+        <td mat-cell *matCellDef="let element">{{ element.hebrewWord }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="correctEnglishWord">
+        <th mat-header-cell *matHeaderCellDef>Correct English Word</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.correctEnglishWord }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="isCorrect">
+        <th mat-header-cell *matHeaderCellDef>Correct?</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.isCorrect ? "✔️" : "❌" }}
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="['hebrewWord', 'correctEnglishWord', 'isCorrect']"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="
+          let row;
+          columns: ['hebrewWord', 'correctEnglishWord', 'isCorrect']
+        "
+      ></tr>
+    </table>
+
+    <a mat-raised-button color="primary" [routerLink]="['/game-selection']">
+      New Game
+    </a>
+
+    <button mat-raised-button color="warn" (click)="exit()">Exit</button>
+  </div>
+</ng-template>

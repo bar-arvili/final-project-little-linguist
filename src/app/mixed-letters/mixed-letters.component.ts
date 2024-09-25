@@ -20,9 +20,11 @@ import { ExitButtonComponent } from '../exit-button/exit-button.component';
 import { TranslatedWord } from '../../shared/model/translated-word';
 import { ExitDialogComponent } from '../exit-dialog/exit-dialog.component';
 import { ViewPointsComponent } from '../view-points/view-points.component';
-import { SummaryDialogComponent } from '../summary-dialog/summary-dialog.component';
 import { GameResultService } from '../services/game-result.service';
 import { GameResult } from '../../shared/model/game-result';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-mixed-letters',
@@ -37,6 +39,9 @@ import { GameResult } from '../../shared/model/game-result';
     MatProgressBarModule,
     ExitButtonComponent,
     ViewPointsComponent,
+    MatTableModule,
+    MatButtonModule,
+    RouterModule,
   ],
   templateUrl: './mixed-letters.component.html',
   styleUrl: './mixed-letters.component.css',
@@ -57,6 +62,11 @@ export class MixedLettersComponent implements OnInit {
   wordPoints: number = 0;
   totalWords: number = 0;
   isFullyLoaded = false;
+  summaryData: {
+    hebrewWord: string;
+    correctEnglishWord: string;
+    isCorrect: boolean;
+  }[] = [];
 
   constructor(
     private categoriesService: CategoriesService,
@@ -82,6 +92,7 @@ export class MixedLettersComponent implements OnInit {
     this.points = 0;
     this.wordOrder = Array.from({ length: this.totalWords }, (_, i) => i);
     this.presentWord();
+    this.gameEnded = false;
   }
 
   presentWord(): void {
@@ -91,7 +102,7 @@ export class MixedLettersComponent implements OnInit {
   }
 
   submit(userInput: string): void {
-    this.userInput = userInput;
+    this.userInput = userInput.trim();
     const currentIndex = this.wordOrder[this.currentWordIndex];
     const currentWord = this.words?.[currentIndex];
     const isCorrect =
@@ -119,9 +130,11 @@ export class MixedLettersComponent implements OnInit {
     } else {
       this.gameEnded = true;
       this.showSummary();
+      this.cdr.markForCheck();
     }
     this.userInput = '';
   }
+
   shuffleArray(array: TranslatedWord[]): TranslatedWord[] {
     return array.sort(() => Math.random() - 0.5);
   }
@@ -144,7 +157,7 @@ export class MixedLettersComponent implements OnInit {
   }
 
   showSummary(): void {
-    const summaryData =
+    this.summaryData =
       this.words?.map((word) => {
         const isCorrect =
           word.guess?.toLowerCase() === word.origin.toLowerCase();
@@ -154,15 +167,6 @@ export class MixedLettersComponent implements OnInit {
           isCorrect: isCorrect,
         };
       }) || [];
-
-    this.dialog.open(SummaryDialogComponent, {
-      data: {
-        points: this.points,
-        totalWords: this.totalWords,
-        successCount: `${this.successCount} / ${this.totalWords}`,
-        summaryData: summaryData,
-      },
-    });
 
     const gameResult = new GameResult(
       this.currentCategory?.id || 'unknown-category',

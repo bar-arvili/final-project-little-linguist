@@ -21,6 +21,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { GameResultService } from '../services/game-result.service';
 import { GameResult } from '../../shared/model/game-result';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-word-sorter',
@@ -34,6 +35,7 @@ import { GameResult } from '../../shared/model/game-result';
     MatTableModule,
     ViewPointsComponent,
     MatProgressSpinnerModule,
+    RouterModule,
   ],
   templateUrl: './word-sorter.component.html',
   styleUrl: './word-sorter.component.css',
@@ -52,10 +54,15 @@ export class WordSorterComponent implements OnInit {
   pointsPerWord: number = 0;
   totalSortingWords: number = 6;
   progressValue: number = 0;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  summaryData: any[] = [];
+  summaryData: {
+    englishWord: string;
+    category: string;
+    isCorrect: boolean;
+  }[] = [];
   isGameFinished: boolean = false;
   isFullyLoaded = false;
+  isGameOn: boolean = true;
+  numCorrectAnswers: number = 0;
 
   constructor(
     private categoriesService: CategoriesService,
@@ -134,7 +141,7 @@ export class WordSorterComponent implements OnInit {
       this.currentSortingWord
     )
       ? this.currentCategory.name
-      : this.randomCategory?.name;
+      : this.randomCategory?.name || 'Unknown';
 
     this.summaryData.push({
       englishWord: this.currentSortingWord.origin,
@@ -144,6 +151,7 @@ export class WordSorterComponent implements OnInit {
 
     if (isAnswerCorrect) {
       this.sortingPoints += this.pointsPerWord;
+      this.numCorrectAnswers++;
     }
 
     this.currentSortingWordIndex++;
@@ -155,6 +163,7 @@ export class WordSorterComponent implements OnInit {
 
   private endSortingGame(): void {
     this.isGameFinished = true;
+    this.isGameOn = false;
     const allCorrect = this.summaryData.every((item) => item.isCorrect);
     if (allCorrect) {
       this.sortingPoints = 100;
