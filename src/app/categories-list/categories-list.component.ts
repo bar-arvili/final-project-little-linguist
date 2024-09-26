@@ -18,7 +18,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    RouterModule,MatProgressSpinnerModule
+    RouterModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './categories-list.component.html',
   styleUrl: './categories-list.component.css',

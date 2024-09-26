@@ -1,3 +1,29 @@
-:host {
-  display: block;
+mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px; 
+  width: 100%;
+}
+
+button[mat-button] {
+  background-color: #E76F51; 
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[mat-button]:hover {
+  background-color: #D65B41; 
+}
+
+button[mat-button].cancel-button {
+  background-color: #F4A261; 
+}
+
+button[mat-button].cancel-button:hover {
+  background-color: #E76F51; 
 }

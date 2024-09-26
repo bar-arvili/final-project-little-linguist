@@ -1,13 +1,13 @@
 mat-dialog-actions {
   display: flex;
   justify-content: center;
-  gap: 15px; /* רווח בין הכפתורים */
+  gap: 15px;
   width: 100%;
   margin-top: 20px;
 }
 
 button[mat-button] {
-  background-color: #756868; /* שינוי צבע הכפתורים */
+  background-color: #756868;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -18,18 +18,17 @@ button[mat-button] {
 }
 
 button[mat-button]:hover {
-  background-color: #5c5966; /* צבע כפתור בעת ריחוף */
+  background-color: #5c5966;
 }
 
 button[mat-button]:disabled {
-  background-color: #ccc; /* צבע כפתור מושבת */
+  background-color: #ccc;
 }
 
-/* עיצוב כפתור Play */
 button.play-button {
-  background-color: #E76F51; /* צבע כפתור PLAY כשהוא זמין */
+  background-color: #e76f51;
 }
 
 button.play-button:hover {
-  background-color: #d65b41; /* צבע כפתור PLAY בעת ריחוף */
+  background-color: #d65b41;
 }

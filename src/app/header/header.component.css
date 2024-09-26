@@ -2,13 +2,13 @@ mat-toolbar {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background-color: #F8EDEB; /* צבע הרקע של ה-toolbar */
-  color: #6D6875; /* צבע הטקסט */
+  background-color: #f8edeb;
+  color: #6d6875;
 }
 
 button[mat-icon-button] {
   margin-right: 8px;
-  color: #6D6875; /* צבע האייקון בתוך הכפתור */
+  color: #6d6875;
 }
 
 .example-spacer {
@@ -17,12 +17,12 @@ button[mat-icon-button] {
 
 mat-icon {
   cursor: pointer;
-  color: #6D6875; /* צבע האייקון */
+  color: #6d6875;
 }
 
 .LittleLinguist {
   font-weight: bold;
   font-size: 1.5em;
   cursor: pointer;
-  color: #6D6875; /* צבע הטקסט של הכותרת */
+  color: #6d6875;
 }
