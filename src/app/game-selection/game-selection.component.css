@@ -10,12 +10,12 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 120px;
+  gap: 70px;
   padding: 20px;
 }
 
 .game-card {
-  width: 450px;
+  width: 400px;
 }
 mat-card {
   display: flex;
