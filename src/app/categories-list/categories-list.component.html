@@ -1,4 +1,8 @@
-<div *ngIf="!isFullyLoaded">....טעינה</div>
+<mat-progress-spinner
+  *ngIf="!isFullyLoaded"
+  diameter="50"
+  mode="indeterminate"
+></mat-progress-spinner>
 <div *ngIf="isFullyLoaded">
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="id">

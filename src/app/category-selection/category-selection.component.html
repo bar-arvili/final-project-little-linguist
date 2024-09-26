@@ -18,6 +18,7 @@
 <div mat-dialog-actions>
   <button
     mat-button
+    class="play-button"
     [disabled]="!selectedCategory"
     [mat-dialog-close]="true"
     [routerLink]="[game.GameUrl, selectedCategory?.id]"

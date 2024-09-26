@@ -3,80 +3,101 @@
   <p>Welcome to your Dashboard</p>
 </div>
 
-<div>
-  <mat-tab-group>
-    <mat-tab label="Summary">
-      <div class="dashboard">
-        <mat-card>
-          <mat-card-title>Total Points</mat-card-title>
-          <mat-card-content>{{ totalPoints }}</mat-card-content>
-        </mat-card>
+<div class="dashboard">
+  <h2>Summary</h2>
+  <div class="summary-grid">
+    <mat-card>
+      <mat-icon style="color: gold; font-size: 25px">star</mat-icon>
+      <mat-card-title>Total Points</mat-card-title>
+      <mat-card-content>
+        <div>{{ totalPoints }}</div>
+      </mat-card-content>
+    </mat-card>
 
-        <mat-card>
-          <mat-card-title>Games Played</mat-card-title>
-          <mat-card-content>{{ gamesPlayed }}</mat-card-content>
-        </mat-card>
+    <mat-card>
+      <mat-icon style="color: blue; font-size: 25px">sports_esports</mat-icon>
+      <mat-card-title>Games Played</mat-card-title>
+      <mat-card-content>{{ gamesPlayed }}</mat-card-content>
+    </mat-card>
 
-        <mat-card>
-          <mat-card-title>Highest Avg Score Game</mat-card-title>
-          <mat-card-content>{{ highestAverageScoreGame }}</mat-card-content>
-        </mat-card>
+    <mat-card>
+      <mat-icon style="color: green; font-size: 25px">trending_up</mat-icon>
+      <mat-card-title>Your highest score game</mat-card-title>
+      <mat-card-content>{{ highestAverageScoreGame }}</mat-card-content>
+    </mat-card>
 
-        <mat-card>
-          <mat-card-title>Lowest Avg Score Game</mat-card-title>
-          <mat-card-content>{{ lowestAverageScoreGame }}</mat-card-content>
-        </mat-card>
+    <mat-card>
+      <mat-icon style="color: red; font-size: 25px">trending_down</mat-icon>
+      <mat-card-title>Your lowest score game</mat-card-title>
+      <mat-card-content>{{ lowestAverageScoreGame }}</mat-card-content>
+    </mat-card>
 
-        <mat-card>
-          <mat-card-title>Categories Studied</mat-card-title>
-          <mat-card-content>{{ categoriesStudied }}</mat-card-content>
-        </mat-card>
+    <mat-card>
+      <mat-icon style="color: orange; font-size: 25px">category</mat-icon>
+      <mat-card-title>Categories you’ve learned</mat-card-title>
+      <mat-card-content>{{ categoriesStudied }}</mat-card-content>
+    </mat-card>
 
-        <mat-card>
-          <mat-card-title>Categories Not Studied</mat-card-title>
-          <mat-card-content>{{ categoriesNotStudied }}</mat-card-content>
-        </mat-card>
+    <mat-card>
+      <mat-icon style="color: purple; font-size: 25px">question_mark</mat-icon>
+      <mat-card-title>Categories you haven’t learned yet</mat-card-title>
+      <mat-card-content>{{ categoriesNotStudied }}</mat-card-content>
+    </mat-card>
 
-        <mat-card>
-          <mat-card-title>% Games with 100 Points</mat-card-title>
-          <mat-card-content>
-            {{ percentageOfGamesWith100Score | number : "1.0-0" }}%
-          </mat-card-content>
-        </mat-card>
+    <mat-card>
+      <mat-icon style="color: #ffd700; font-size: 25px">emoji_events</mat-icon>
+      <mat-card-title>Games with 100 points</mat-card-title>
+      <mat-card-content>
+        {{ percentageOfGamesWith100Score | number : "1.0-0" }}%
+      </mat-card-content>
+    </mat-card>
 
-        <mat-card>
-          <mat-card-title>% Categories Studied</mat-card-title>
-          <mat-card-content>
-            {{ percentageOfCategoriesStudied | number : "1.0-0" }}%
-          </mat-card-content>
-        </mat-card>
+    <mat-card>
+      <mat-icon style="color: teal; font-size: 25px">school</mat-icon>
+      <mat-card-title>Percentage of categories studied</mat-card-title>
+      <mat-card-content>
+        {{ percentageOfCategoriesStudied | number : "1.0-0" }}%
+      </mat-card-content>
+    </mat-card>
 
-        <mat-card>
-          <mat-card-title>Most Played Category</mat-card-title>
-          <mat-card-content>{{ mostPlayedCategory }}</mat-card-content>
-        </mat-card>
+    <mat-card>
+      <mat-icon style="color: brown; font-size: 25px">favorite</mat-icon>
+      <mat-card-title>Your most played category</mat-card-title>
+      <mat-card-content>{{ mostPlayedCategory }}</mat-card-content>
+    </mat-card>
+  </div>
 
-        <mat-card>
-          <mat-card-title>Monthly Games Played</mat-card-title>
-          <mat-card-content>{{ monthlyGamesPlayed }}</mat-card-content>
-        </mat-card>
+  <h2>Monthly Challenge</h2>
+  <div class="monthly-challenge-grid">
+    <mat-card>
+      <mat-icon style="color: gold; font-size: 25px">flag</mat-icon>
+      <mat-card-title>Monthly challenge</mat-card-title>
+      <mat-card-content
+        style="font-size: 24px"
+        *ngIf="gamesToCompleteChallenge > 0"
+      >
+        {{ gamesToCompleteChallenge }} games left to reach the monthly challenge
+      </mat-card-content>
+      <mat-card-content
+        style="font-size: 30px"
+        *ngIf="gamesToCompleteChallenge === 0"
+      >
+        Congratulations! You've completed the monthly challenge!
+      </mat-card-content>
+    </mat-card>
 
-        <mat-card>
-          <mat-card-title>Games to Complete Monthly Challenge</mat-card-title>
-          <mat-card-content *ngIf="gamesToCompleteChallenge > 0">
-            {{ gamesToCompleteChallenge }} more games to reach 20 games this
-            month.
-          </mat-card-content>
-          <mat-card-content *ngIf="gamesToCompleteChallenge === 0">
-            Congratulations! You've completed the monthly challenge!
-          </mat-card-content>
-        </mat-card>
+    <mat-card>
+      <mat-icon style="color: blueviolet; font-size: 25px"
+        >calendar_today</mat-icon
+      >
+      <mat-card-title>Days played in a row</mat-card-title>
+      <mat-card-content>{{ daysStrike }}</mat-card-content>
+    </mat-card>
 
-        <mat-card>
-          <mat-card-title>Consecutive Days Played (Days Strike)</mat-card-title>
-          <mat-card-content>{{ daysStrike }}</mat-card-content>
-        </mat-card>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+    <mat-card>
+      <mat-icon style="color: salmon; font-size: 25px">event</mat-icon>
+      <mat-card-title>Games played this month</mat-card-title>
+      <mat-card-content>{{ monthlyGamesPlayed }}</mat-card-content>
+    </mat-card>
+  </div>
 </div>

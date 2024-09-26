@@ -8,6 +8,7 @@ import { Category } from '../../shared/model/category';
 import { CategoriesService } from '../services/categories.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteCategoryDialogComponent } from '../delete-category-dialog/delete-category-dialog.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-categories-list',
@@ -17,7 +18,7 @@ import { DeleteCategoryDialogComponent } from '../delete-category-dialog/delete-
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    RouterModule,
+    RouterModule,MatProgressSpinnerModule
   ],
   templateUrl: './categories-list.component.html',
   styleUrl: './categories-list.component.css',

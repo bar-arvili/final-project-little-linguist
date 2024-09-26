@@ -10,24 +10,23 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 250px; /* שינוי המרווח בין הכרטיסיות */
   padding: 20px;
 }
 
 .game-card {
-  width: 300px;
+  width: 500px; /* הגדלת רוחב הכרטיסיות */
 }
-
 mat-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   padding: 20px;
-  background-color: white;
+  background-color: #dceef2; /* שינוי צבע הכרטיס */
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 350px;
+  height: 500px; /* הגדלת גובה הכרטיסיות */
   box-sizing: border-box;
 }
 
@@ -40,8 +39,8 @@ mat-card-header {
 }
 
 mat-card-title {
-  font-size: 1.5em;
-  color: #3f51b5;
+  font-size: 2em; /* הגדלת הכותרת */
+  color: #6d6875; /* שינוי צבע הכותרת */
   margin: 0;
 }
 
@@ -55,9 +54,11 @@ mat-card-content {
 }
 
 mat-card-content p {
-  font-size: 1em;
+  font-size: 1.2em; /* הגדלת גודל הטקסט */
   margin: 0;
   padding: 0 10px;
+  color: #000; /* שינוי צבע המלל לשחור */
+  font-weight: bold; /* המלל יותר בולט */
 }
 
 mat-card-actions {
@@ -70,16 +71,16 @@ mat-card-actions {
 }
 
 button[mat-button] {
-  background-color: #3f51b5;
+  background-color: #e76f51; /* שינוי צבע הכפתורים */
   color: white;
   border: none;
   padding: 10px 20px;
-  font-size: 1em;
+  font-size: 1.2em;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button[mat-button]:hover {
-  background-color: #303f9f;
+  background-color: #dd350b; /* שינוי צבע הכפתור בעת ריחוף */
 }

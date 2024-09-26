@@ -1,29 +1,71 @@
+body {
+  background-color: #f3f4ed; /* צבע רקע עדין וניוד */
+}
+
 .container {
   text-align: center;
   margin-top: 20px;
 }
 
 h1 {
-  font-size: 24px;
+  font-size: 48px; /* הגדלת גודל הפונט */
   font-weight: bold;
-  color: #3b5998;
-  margin-bottom: 10px;
+  color: #6d6875; /* צבע הכותרת */
+  margin-bottom: 20px; /* מרווח תחתון להפרדה */
+  margin-top: 40px; /* מרווח עליון להדגשה */
+  text-align: center;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #355c7d; /* כחול כהה יותר ומעט בולט יותר */
+  margin-top: 20px;
+  text-align: center;
+  position: relative; /* כדי שהקו התחתון ימוקם ביחס לכותרת */
+}
+
+h2::after {
+  content: ""; /* יצירת אלמנט ריק */
+  display: block;
+  width: 60%; /* הקו לא מגיע עד סוף העמוד */
+  height: 1px; /* גובה הקו */
+  background-color: #4a90a4; /* צבע הקו */
+  position: absolute;
+  bottom: -10px; /* מרחק מהטקסט */
+  left: 50%; /* כדי למרכז את הקו */
+  transform: translateX(-50%); /* חישוב מרחק עבור המרכז */
 }
 
 p {
-  font-size: 16px;
-  color: #555;
+  font-size: 20px;
+  color: #685586; /* צבע טקסט עדין */
+  text-align: center;
 }
 
-.dashboard {
+/* סגנון כרטיסיות עבור חלק ה-Summary */
+.summary-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* 3 כרטיסיות בשורה */
   grid-gap: 20px;
   padding: 20px;
+  justify-items: center;
 }
 
+/* סגנון כרטיסיות עבור חלק ה-Monthly Challenge */
+.monthly-challenge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 כרטיסיות בשורה */
+  grid-gap: 20px;
+  padding: 20px;
+  justify-items: center;
+}
+
+/* שינויים עבור כרטיסיות */
 mat-card {
-  background-color: #ffeead;
+  width: 600px; /* רוחב קבוע לכל הכרטיסיות */
+  height: 200px; /* גובה קבוע לכל הכרטיסיות */
+  background-color: #dceef2; /* צבע רקע נייטרלי בגווני תכלת בהיר */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -32,7 +74,6 @@ mat-card {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 200px;
 }
 
 mat-card:hover {
@@ -41,20 +82,21 @@ mat-card:hover {
 }
 
 mat-card-title {
-  font-size: 14px;
-  font-weight: bold;
-  color: #ff6347;
+  font-size: 20 px;
+
+  color: #4a6572; /* צבע כותרת בגוון אפור-כחול נייטרלי */
 }
 
 mat-card-content {
-  font-size: 32px;
-  color: #4caf50;
+  font-size: 40px;
+  font-weight: bold;
+  color: #E76F51; /* כתום פסטלי בולט */
 }
 
 mat-card-content[ng-if="gamesToCompleteChallenge > 0"],
 mat-card-content[ng-if="gamesToCompleteChallenge === 0"] {
   font-size: 16px;
-  color: #333;
+  color: #6d6875; /* צבע טקסט עדין */
 }
 
 mat-tab-group {
@@ -65,5 +107,5 @@ mat-tab-group {
 
 mat-tab-label {
   font-size: 16px;
-  color: #000;
+  color: #6d6875; /* צבע טאב */
 }

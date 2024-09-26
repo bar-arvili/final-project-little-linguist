@@ -28,14 +28,14 @@ body {
 }
 
 .title {
-  font-size: 3rem;
+  font-size: 4rem; /* הגדרת גודל טקסט גדול יותר */
   font-weight: bold;
   text-align: center;
   margin: 0;
 }
 
 .category-name {
-  font-size: 1.5rem;
+  font-size: 2rem; /* הגדלת גודל הקטגוריה */
   color: #666;
   margin-top: 10px;
   text-align: center;
@@ -43,8 +43,31 @@ body {
 
 .exit-button {
   position: absolute;
-  top: 400px;
-  left: 500px;
+  top: 30%; /* מיקום באמצע גובה המסך */
+  left: 700px; /* מיקום בצד שמאל של העמוד */
+  transform: translateY(-50%); /* מיקום מדויק באמצע גובה המסך */
+  font-size: 1.5rem; /* גודל הטקסט */
+  padding: 15px 40px; /* שולי הכפתור */
+  width: auto; /* התאמת הרוחב לתוכן */
+  height: auto; /* התאמת הגובה לתוכן */
+  background-color: #1976d2; /* צבע הרקע */
+  color: white; /* צבע הטקסט */
+  border-radius: 8px; /* פינות מעוגלות */
+  cursor: pointer; /* מצביע העכבר */
+  transition: background-color 0.3s ease; /* מעבר רך של שינוי צבע */
+  display: flex; /* הצגת האייקון והטקסט זה לצד זה */
+  justify-content: center; /* יישור התוכן במרכז */
+  align-items: center;
+}
+
+.exit-button mat-icon {
+  font-size: 1.5rem; /* גודל האייקון מוקטן */
+  margin-right: 10px; /* רווח בין האייקון לטקסט */
+  line-height: 1; /* הבטחה שהאייקון לא ייחתך */
+}
+
+.exit-button:hover {
+  background-color: #1565c0; /* שינוי צבע כאשר העכבר מעל הכפתור */
 }
 
 .points-container {
@@ -61,7 +84,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 600px;
+  max-width: 800px; /* הגדלת הרוחב המקסימלי של גוף המשחק */
   padding: 20px;
   background-color: transparent;
   border-radius: 0;
@@ -81,14 +104,14 @@ body {
 
 .label {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.5rem; /* הגדלת גודל הכותרות */
   color: #333;
   margin-bottom: 10px;
 }
 
 .hebrew-word,
 .english-word {
-  font-size: 2rem;
+  font-size: 3rem; /* הגדלת גודל המילים */
   font-weight: bold;
   color: #000;
   margin-bottom: 20px;
@@ -113,7 +136,7 @@ body {
 
 button.submit-button {
   width: 48%;
-  font-size: 1.2rem;
+  font-size: 1.5rem; /* הגדלת גודל הכפתורים */
   padding: 10px;
   background-color: #1976d2;
   color: #fff;
@@ -135,7 +158,7 @@ button.submit-button:hover:enabled {
 
 button.reset-button {
   width: 48%;
-  font-size: 1.2rem;
+  font-size: 1.5rem; /* הגדלת גודל הכפתורים */
   padding: 10px;
   background-color: #d32f2f;
   color: #fff;
@@ -156,14 +179,43 @@ button.reset-button:hover {
 
 .progress-text {
   margin-top: 10px;
-  font-size: 1rem;
+  font-size: 1.5rem; /* הגדלת גודל הטקסט של המספרים בפרוגרס בר */
   color: #555;
   text-align: center;
 }
 
+.progress-bar {
+  width: 100%; /* הפרוגרס בר על כל המסך */
+  height: 20px;
+  background-color: #e0e0e0;
+  position: relative;
+}
+
+.progress-bar-value {
+  background-color: #1976d2;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.progress-text-left {
+  position: absolute;
+  left: 0;
+  top: -30px; /* מיקום המספר מצד שמאל */
+  font-size: 1.5rem;
+  color: #555;
+}
+
+.progress-text-right {
+  position: absolute;
+  right: 0;
+  top: -30px; /* מיקום המספר מצד ימין */
+  font-size: 1.5rem;
+  color: #555;
+}
+
 .game-over {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 2rem; /* הגדלת גודל הטקסט של סיום המשחק */
   color: #d32f2f;
   font-weight: bold;
 }

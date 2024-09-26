@@ -6,14 +6,14 @@ import { CategoriesService } from '../services/categories.service';
 import { GameResult } from '../../shared/model/game-result';
 import { Category } from '../../shared/model/category';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatTabsModule],
+  imports: [CommonModule, MatCardModule, MatTabsModule,MatIconModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
-  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
   totalPoints: number = 0;

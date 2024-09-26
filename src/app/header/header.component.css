@@ -2,10 +2,13 @@ mat-toolbar {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  background-color: #F8EDEB; /* צבע הרקע של ה-toolbar */
+  color: #6D6875; /* צבע הטקסט */
 }
 
 button[mat-icon-button] {
   margin-right: 8px;
+  color: #6D6875; /* צבע האייקון בתוך הכפתור */
 }
 
 .example-spacer {
@@ -14,10 +17,12 @@ button[mat-icon-button] {
 
 mat-icon {
   cursor: pointer;
+  color: #6D6875; /* צבע האייקון */
 }
 
 .LittleLinguist {
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.5em;
   cursor: pointer;
+  color: #6D6875; /* צבע הטקסט של הכותרת */
 }

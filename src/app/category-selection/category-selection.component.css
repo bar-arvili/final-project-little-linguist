@@ -1,3 +1,35 @@
-:host {
-  display: block;
+mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* רווח בין הכפתורים */
+  width: 100%;
+  margin-top: 20px;
+}
+
+button[mat-button] {
+  background-color: #756868; /* שינוי צבע הכפתורים */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[mat-button]:hover {
+  background-color: #5c5966; /* צבע כפתור בעת ריחוף */
+}
+
+button[mat-button]:disabled {
+  background-color: #ccc; /* צבע כפתור מושבת */
+}
+
+/* עיצוב כפתור Play */
+button.play-button {
+  background-color: #E76F51; /* צבע כפתור PLAY כשהוא זמין */
+}
+
+button.play-button:hover {
+  background-color: #d65b41; /* צבע כפתור PLAY בעת ריחוף */
 }
