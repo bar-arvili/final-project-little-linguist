@@ -1,4 +1,26 @@
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.mat-progress-spinner,
+.mat-spinner {
+  width: 100px !important;
+  height: 100px !important;
+}
+
 .add-button-container {
   display: flex;
   justify-content: center;
+}
+
+.custom-dark-orange-button {
+  background-color: #ffb07c;
+  color: white;
+}
+
+.custom-dark-orange-button:hover {
+  background-color: #ff8c54;
 }

@@ -1,8 +1,10 @@
-<mat-progress-spinner
-  *ngIf="!isFullyLoaded"
-  diameter="50"
-  mode="indeterminate"
-></mat-progress-spinner>
+<div class="spinner-container" *ngIf="!isFullyLoaded">
+  <mat-progress-spinner
+    diameter="100"
+    mode="indeterminate"
+  ></mat-progress-spinner>
+</div>
+
 <div *ngIf="isFullyLoaded">
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="id">
@@ -45,8 +47,14 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+
   <div class="add-button-container">
-    <button mat-fab color="primary" routerLink="/newcategory">
+    <button
+      mat-fab
+      color="accent"
+      routerLink="/newcategory"
+      class="custom-dark-orange-button"
+    >
       <mat-icon>add</mat-icon>
     </button>
   </div>

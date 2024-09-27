@@ -8,7 +8,8 @@
     <mat-icon>exit_to_app</mat-icon>
   </button>
 </div>
-<div>
+
+<div class="time-container">
   <p>Time Remaining: {{ timeRemaining }} seconds</p>
 </div>
 
@@ -43,7 +44,6 @@
     <div class="button-container">
       <button
         mat-raised-button
-        color="primary"
         class="submit-button"
         (click)="submit(userInput)"
         [disabled]="originField.invalid || !userInput.trim()"
@@ -51,12 +51,7 @@
         Submit
       </button>
 
-      <button
-        mat-raised-button
-        color="primary"
-        class="reset-button"
-        (click)="reset()"
-      >
+      <button mat-raised-button class="reset-button" (click)="reset()">
         Reset
       </button>
     </div>
@@ -111,10 +106,18 @@
       ></tr>
     </table>
 
-    <a mat-raised-button color="primary" [routerLink]="['/game-selection']">
-      New Game
-    </a>
+    <div class="summary-buttons">
+      <a
+        mat-raised-button
+        class="new-game-button"
+        [routerLink]="['/game-selection']"
+      >
+        New Game
+      </a>
 
-    <button mat-raised-button color="warn" (click)="exit()">Exit</button>
+      <button mat-raised-button class="exit-button-summary" (click)="exit()">
+        Exit
+      </button>
+    </div>
   </div>
 </ng-template>

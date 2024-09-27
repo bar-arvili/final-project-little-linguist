@@ -8,7 +8,7 @@
     <app-view-points [points]="sortingPoints"></app-view-points>
   </div>
 
-  <button mat-icon-button (click)="exit()">
+  <button mat-icon-button (click)="exit()" class="exit-button">
     <mat-icon>exit_to_app</mat-icon>
   </button>
 
@@ -39,13 +39,13 @@
     </div>
 
     <div class="progress-container">
-      <span>
-        word {{ currentSortingWordIndex + 1 }} / {{ totalSortingWords }}</span
-      >
       <mat-progress-bar
         mode="determinate"
         [value]="progressValue"
       ></mat-progress-bar>
+      <span
+        >word {{ currentSortingWordIndex + 1 }} / {{ totalSortingWords }}</span
+      >
     </div>
   </div>
 </div>
@@ -87,9 +87,11 @@
       ></tr>
     </table>
 
-    <a mat-raised-button color="primary" [routerLink]="['/game-selection']">
-      New Game
-    </a>
-    <button mat-raised-button color="warn" (click)="exit()">Exit</button>
+    <div class="summary-buttons">
+      <a class="new-game-button" [routerLink]="['/game-selection']">
+        New Game
+      </a>
+      <button class="exit-button" (click)="exit()">Exit</button>
+    </div>
   </div>
 </ng-template>

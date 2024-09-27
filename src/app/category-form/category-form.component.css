@@ -5,3 +5,22 @@
 .new-word-element {
   padding-right: 8px;
 }
+
+.custom-dark-orange-button {
+  background-color: #ffb07c;
+  color: white;
+}
+
+.custom-dark-orange-button {
+  background-color: #ffb07c !important;
+  color: white !important;
+}
+
+.custom-dark-orange-button:hover {
+  background-color: #ff8c54 !important;
+  color: white !important;
+}
+
+.custom-dark-orange-button.mat-button-base {
+  box-shadow: none !important;
+}
